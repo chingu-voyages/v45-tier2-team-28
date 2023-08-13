@@ -1,7 +1,6 @@
 'use client';
 import React, { Suspense } from 'react';
 import Head from 'next/head';
-import { useClientEffect } from 'next'; // Ensure this import
 
 // component imports 
 import MapBox from '@/components/Map';
@@ -10,7 +9,7 @@ import MapBox from '@/components/Map';
 import styles from './page.module.css';
 
 export default function Home() {
-  // useClientEffect(() => {}, []);
+ 
 
   return (
     <>
