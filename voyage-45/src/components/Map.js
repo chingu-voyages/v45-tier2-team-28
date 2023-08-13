@@ -1,23 +1,33 @@
+import React, { useState, useEffect } from "react";
+import mapboxgl from 'mapbox-gl';
 
-// FUnction to create GeoJSON obnj from fetched data
-function createGeoJSONObj(data) {
-    let obj = {
-      type: "feature",
-      geometry: {
-        type: "Point",
-        // GeoJSON is longitude first
-        coordinates: [data.reclong, data.reclat],
-      },
-      // Properties can be any type and value
-      properties: {
-        title: data.name, // Name of the meteorite fall location
-        type: data.recclass, // Meteorite classification
-        year: data.year, // Year observed
-        // Since the incoming meteorite mass value is a string, convert
-        // it to a number with parseInt() — this is important because
-        // I want to use meteorite mass as a major focus of the map styles
-        mass: convertToNum(data.mass),
-      },
-    };
-    return obj;
-  }
+// mapbox api_key held in .env file
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_API_KEY;
+
+function MapBox() {
+    const [map, setMap] = useState(null);
+
+    useEffect(() => { 
+        if (!map) {
+            // Instantiate map instance
+            const newMapInstance = new mapboxgl.Map({
+                container: "map", 
+                style: "mapbox://styles/mapbox/dark-v11",
+                projection: "mercator",
+                center: [60, 25],
+                zoom: 1,
+                cooperativeGestures: true,
+            });
+
+            setMap(newMapInstance);
+        }
+
+        return () => {
+            if (map) map.remove();
+        };
+    }, [map]);
+
+    return <div id="map" style={{ width: '100%', height: '400px' }} />;
+}
+
+export default MapBox;
