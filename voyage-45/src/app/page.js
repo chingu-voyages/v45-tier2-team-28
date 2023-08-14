@@ -1,27 +1,31 @@
-import Image from 'next/image';
+'use client';
+import React, { Suspense } from 'react';
+import Head from 'next/head';
+
+// component imports 
+import MapBox from '@/components/Map';
+
+/* style imports */
 import styles from './page.module.css';
 
-
 export default function Home() {
-
-  mapboxgl.accesstoken = process.env.API_KEY
-
-  const map = new mapboxgl.Map({
-    container: "map", // Container ID
-    style: "mapbox://styles/mapbox/dark-v11", 
-    projection: "mercator", 
-    center: [60, 25], 
-    zoom: 1,
-    cooperativeGestures: true, 
-  });
+ 
 
   return (
     <>
-      <body>
-        <h1>Home Page</h1>
-
+      <Head>
+        <link
+          href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
+          rel="stylesheet"
+        />
         <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script>
-      </body>
+      </Head>
+      
+      <h1>Home Page</h1>
+
+      <Suspense fallback={<div>Loading map...</div>}>
+        <MapBox />
+      </Suspense>
     </>
   )
 }
