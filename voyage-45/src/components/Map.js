@@ -67,6 +67,67 @@ function MapBox() {
                             "circle-opacity": ["interpolate", ["linear"], ["zoom"], 3, 0, 4, 0.9],
                         },
                     });
+
+                    newMapInstance.addLayer({
+                        id: "meteorites-heat",
+                        type: "heatmap",
+                        source: "points",
+                        maxzoom: 6,
+                        paint: {
+                            "heatmap-weight": [
+                                "interpolate",
+                                ["linear"],
+                                ["get", "mass"],
+                                10,
+                                0,
+                                500000,
+                                0.3,
+                                3000000,
+                                0.5,
+                                10000000,
+                                0.8,
+                                20000000,
+                                1,
+                            ],
+                            "heatmap-intensity": [
+                                "interpolate",
+                                ["linear"],
+                                ["zoom"],
+                                0,
+                                0,
+                                5,
+                                2
+                            ],
+                            "heatmap-color": [
+                                "interpolate",
+                                ["linear"],
+                                ["heatmap-density"],
+                                0,
+                                "rgba(255, 255, 255, 0)",
+                                0.2,
+                                "rgba(255, 250, 200, 0.5)",
+                                0.4,
+                                "rgba(255, 200, 100, 0.7)",
+                                0.6,
+                                "rgba(255, 150, 50, 0.8)",
+                                0.8,
+                                "rgba(255, 100, 25, 0.9)",
+                                1,
+                                "rgba(255, 50, 0, 1)"
+                            ],
+                            "heatmap-opacity": [
+                                "interpolate",
+                                ["linear"],
+                                ["zoom"],
+                                0,
+                                0.3,
+                                4,
+                                0.7,
+                                6,
+                                1
+                            ],
+                        },
+                      });
                 } catch (error) {
                     console.error("Error fetching or processing data:", error);
                 }
