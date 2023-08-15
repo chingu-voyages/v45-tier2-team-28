@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import FilterBar from '../components/FilterBar';
+
 
 // component imports 
 import MapBox from '@/components/Map';
@@ -49,11 +51,18 @@ export default function Home() {
           href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
           rel="stylesheet"
         />
+<<<<<<< HEAD
 
       </Head>
       
       <Navbar />
       <h1>Home Page</h1>
+=======
+        {/* <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script> */}
+      </Head>
+      
+      <FilterBar />
+>>>>>>> 824e68c (Created FilterBar component, and imported into the main app page.js)
 
       <MapBox data={data} />
     </>
