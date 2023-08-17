@@ -4,9 +4,11 @@ import Head from 'next/head';
 
 // component imports 
 import MapBox from '@/components/Map';
+import Modal from '@/components/Modal';
 
 /* style imports */
 import styles from './page.module.css';
+
 
 export default function Home() {
  
@@ -22,9 +24,9 @@ export default function Home() {
       </Head>
       
       <h1>Home Page</h1>
-
+      <Modal/>
       <Suspense fallback={<div>Loading map...</div>}>
-        <MapBox />
+        {/* <MapBox /> */}
       </Suspense>
     </>
   )
