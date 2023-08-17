@@ -1,11 +1,27 @@
-import { Fragment, useState } from 'react'
-import { Dialog, Transition } from '@headlessui/react'
-import { XMarkIcon, ChevronDoubleRightIcon } from '@heroicons/react/24/outline'
+import { useState, useEffect } from 'react'
 
 import styles from './styles/Modal.module.css'
 
+
+
 export default function Modal() {
   const [open, setOpen] = useState(false)
+  const [meteorList, setMeteorList] = useState([])
+
+  const fetchMeteorData = async () => {
+    try {
+        const response = await fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
+        const data = await response.json()
+        setMeteorList(data)
+        console.log(data)
+    } catch (error) {
+        console.error("Error fetching data", error)
+    }
+  }
+
+  useEffect(() => {
+    fetchMeteorData()
+  }, [])
 
   return ( open ?
     <div className={styles.modal}>
@@ -21,12 +37,18 @@ export default function Modal() {
                     </tr>
                 </thead>
                 <tbody>
+                    {meteorList.map((meteor) => {
+                        return(
                     <tr>
-                        <td>Pinky</td>
-                        <td>2023</td>
-                        <td>L5</td>
-                        <td>Large</td>
-                    </tr>
+                        <td>{meteor.name}</td>
+                        <td>{new Date (meteor.year).getFullYear()}</td>
+                        <td>{meteor.recclass}</td>
+                        {meteor.mass ? 
+                            <td>{Math.round(meteor.mass)}</td> : <td>Unknown</td>
+                        }
+                    </tr>)
+                    })}
+
                 </tbody>
             </table>
         </div>
