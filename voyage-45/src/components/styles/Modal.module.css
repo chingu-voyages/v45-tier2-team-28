@@ -1,0 +1,13 @@
+.modal {
+    height: 700px;
+    width: 50vh;
+    border: 1px solid black;
+    margin-top: 20px;
+    margin-left: 20px;
+    overflow-y: auto;
+}
+
+.table-title {
+    padding-left: 3px;
+    padding-right: 3px;
+}
