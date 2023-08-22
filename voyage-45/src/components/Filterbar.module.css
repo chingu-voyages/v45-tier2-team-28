@@ -1,0 +1,23 @@
+.formContainer {
+    width: 100%;
+}
+
+.form {
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    background: gray;
+}
+
+.button {
+    padding: 5px 8px;
+}
+
+.range {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.checkbox {
+    margin: 0 10px;
+}
