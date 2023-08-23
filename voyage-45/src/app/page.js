@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 
@@ -48,6 +49,7 @@ export default function Home() {
           href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
           rel="stylesheet"
         />
+
       </Head>
       
       <Navbar />

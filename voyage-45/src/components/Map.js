@@ -169,7 +169,7 @@ function MapBox({ data }) {
                     dangerouslySetInnerHTML={{ __html: tooltip.content }}
                 />
             )}
-        </div>
+
     );
 }
 
