@@ -6,7 +6,8 @@
     padding: 10px;
     display: flex;
     justify-content: space-evenly;
-    background: gray;
+    align-items: center;
+    /* background: gray; */
 }
 
 .button {
