@@ -14,20 +14,31 @@ export default function Modal() {
         const response = await fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
         const data = await response.json()
 
-        for (const meteor of data) {
-            if (!(meteor.location)){
-            const location = await fetchLocationData(meteor.geolocation?.latitude, meteor.geolocation?.longitude)
-            meteor.location = location
-            console.log(meteor.location)
-            }
-        }
+        const locationPromises = data.map(async(meteor) => {
+            if (meteor.geolocation?.latitude && meteor.geolocation?.longitude){
 
-        setMeteorList(data)
+                return {
+                    ...meteor,
+                    location: await fetchLocationData(meteor.geolocation.latitude, meteor.geolocation.longitude),
+                    
+                }
+                console.log(location)
+            } else {
+                return meteor
+            }
+        })
+
+        const settledPromises = await Promise.allSettled(locationPromises)
+
+        const meteorDataWithLocation = settledPromises.filter((result) => result.status === 'fulfilled').map((result)=> result.value)
+
+        setMeteorList(meteorDataWithLocation)
 
     } catch (error) {
         console.error("Error fetching data", error)
     }
   }
+
 
   useEffect(() => {
     fetchMeteorData()
