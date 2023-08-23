@@ -1,27 +1,38 @@
-'use client';
+"use client";
 
-import React, { useState, useEffect } from 'react';
-import Head from 'next/head';
-import FilterBar from '../components/FilterBar';
+import React, { useState, useEffect } from "react";
+import Head from "next/head";
 
-
-// component imports 
-import MapBox from '@/components/Map';
-import Navbar from '@/components/Navbar';
+// component imports
+import MapBox from "@/components/Map";
+import Navbar from "@/components/Navbar";
 
 /* style imports */
-import styles from './page.module.css';
+import styles from "./page.module.css";
 
 export default function Home() {
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [filterYear, setFilterYear] = useState("");
+  const [filterClass, setFilterClass] = useState("");
+  const [filterName, setFilterName] = useState("");
+  const [filterMass, setFilterMass] = useState({
+    small: false,
+    mid: false,
+    large: false,
+  });
+  const [lowMass, setLowMass] = useState(0);
+  const [highMass, setHighMass] = useState(1000000);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const req = await fetch("https://data.nasa.gov/resource/gh4g-9sfh.json");
+        const req = await fetch(
+          "https://data.nasa.gov/resource/gh4g-9sfh.json"
+        );
         const responseData = await req.json();
-        
-        const mapPoints = responseData.map(item => ({
+
+        const mapPoints = responseData.map((item) => ({
           type: "Feature",
           geometry: {
             type: "Point",
@@ -32,10 +43,11 @@ export default function Home() {
             type: item.recclass,
             year: item.year,
             mass: parseFloat(item.mass || 0),
-          }, 
+          },
         }));
 
         setData(mapPoints);
+        setFilteredData(mapPoints);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -44,6 +56,76 @@ export default function Home() {
     fetchData();
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    filterBar();
+  };
+
+  const filterBar = () => {
+    if (filterYear === undefined) {
+      setFilterYear("");
+    }
+    const stringYear = filterYear.toString();
+    setFilteredData(
+      data.filter((item) => {
+        if (
+          item.properties.title
+            .toLowerCase()
+            .includes(filterName.toLowerCase()) &&
+            item.properties.year &&
+          item.properties.year.toLowerCase().includes(stringYear.toLowerCase()) &&
+          item.properties.type.toLowerCase().includes(filterClass.toLowerCase()) &&
+          item.properties.mass >= lowMass &&
+          item.properties.mass <= highMass
+        ) {
+          return item;
+        }
+      })
+    );
+  };
+
+  const handleNameChange = (e) => {
+    setFilterName(e.target.value);
+  };
+
+  const handleYearChange = (e) => {
+    setFilterYear(e.target.value);
+  };
+
+  const handleTypeChange = (e) => {
+    setFilterClass(e.target.value);
+  }
+
+  const handleMassChange = (e) => {
+    const { name, checked, value } = e.target;
+    const [start, end] = value.split("-").map(Number);
+    setFilterMass({
+      small: name === 'small' ? checked : false,
+      mid: name === 'mid' ? checked : false,
+      large: name === 'large' ? checked : false
+    });
+    setLowMass(start);
+    setHighMass(end);
+    }
+    // setFilterMass({ ...filterMass, [e.target.name]: e.target.checked });
+
+  const clear = (e) => {
+    e.preventDefault();
+    setFilteredData(data);
+    setFilterYear("");
+    setFilterClass("");
+    setFilterName("");
+    setFilterMass({
+      small: false,
+      mid: false,
+      large: false
+    })
+    setLowMass(0);
+    setHighMass(1000000);
+  }
+
+  console.log(filteredData.length);
+
   return (
     <>
       <Head>
@@ -51,20 +133,22 @@ export default function Home() {
           href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
           rel="stylesheet"
         />
-<<<<<<< HEAD
-
       </Head>
-      
-      <Navbar />
-      <h1>Home Page</h1>
-=======
-        {/* <script src="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js"></script> */}
-      </Head>
-      
-      <FilterBar />
->>>>>>> 824e68c (Created FilterBar component, and imported into the main app page.js)
 
-      <MapBox data={data} />
+      <Navbar
+        submit={handleSubmit}
+        name={filterName}
+        updateName={handleNameChange}
+        updateYear={handleYearChange}
+        updateType={handleTypeChange}
+        updateSelected={handleMassChange}
+        year={filterYear}
+        mass={filterMass}
+        type={filterClass}
+        clear={clear}
+      />
+
+      <MapBox data={filteredData} />
     </>
   );
 }
