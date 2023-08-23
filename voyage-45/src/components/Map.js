@@ -20,7 +20,7 @@ function MapBox({ data }) {
             projection: "mercator",
             center: [60, 25],
             zoom: 1,
-            cooperativeGestures: true,
+            // cooperativeGestures: true,
             touchZoomRotate: { enableRotation: false },
         });
 
@@ -148,6 +148,8 @@ function MapBox({ data }) {
         map.on('mouseleave', 'meteorites-point', () => {
             setTooltip({ display: false, content: "", x: 0, y: 0 });
         });
+
+        map.touchZoomRotate.disable();
 
         return () => {
             map.remove();
