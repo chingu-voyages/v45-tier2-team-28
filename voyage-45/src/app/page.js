@@ -23,6 +23,7 @@ export default function Home() {
   });
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
+  const [searchIsShowing, setSearchIsShowing] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -124,6 +125,11 @@ export default function Home() {
     setHighMass(1000000);
   }
 
+  const toggleSearchBar = (e) => {
+    e.preventDefault();
+    setSearchIsShowing(!searchIsShowing);
+  }
+
   console.log(filteredData.length);
 
   return (
@@ -136,6 +142,8 @@ export default function Home() {
       </Head>
 
       <Navbar
+      toggleSearchBar={toggleSearchBar}
+      searchIsShowing={searchIsShowing}
         submit={handleSubmit}
         name={filterName}
         updateName={handleNameChange}

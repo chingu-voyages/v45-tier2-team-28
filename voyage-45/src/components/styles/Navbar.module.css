@@ -19,3 +19,8 @@
     background-color: #555;
 }
 
+.toggleBtn {
+    position: absolute;
+    left: 10%;
+    top: 3%;
+}
