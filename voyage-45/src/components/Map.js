@@ -157,9 +157,10 @@ function MapBox({ data }) {
     return (
         <div className={styles.mapContainer}>
             <div id="map" style={{ width: "100%", height: "100%" }} />
+            
             {tooltip.display && (
                 <div
-                    className={tooltipStyles.tooltip} // <-- This line uses the tooltip styles from the CSS module
+                    className={tooltipStyles.tooltip}
                     style={{
                         position: 'absolute',
                         left: `${tooltip.x}px`,
@@ -169,8 +170,7 @@ function MapBox({ data }) {
                     dangerouslySetInnerHTML={{ __html: tooltip.content }}
                 />
             )}
-
+        </div>
     );
 }
-
 export default MapBox;
