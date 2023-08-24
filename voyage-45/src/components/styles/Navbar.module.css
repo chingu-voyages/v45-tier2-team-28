@@ -5,6 +5,7 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+    flex-direction: column;
 }
 
 .navItem {
@@ -18,3 +19,8 @@
     background-color: #555;
 }
 
+.toggleBtn {
+    position: absolute;
+    left: 10%;
+    top: 3%;
+}
