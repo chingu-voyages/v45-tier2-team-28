@@ -6,6 +6,7 @@ import Head from "next/head";
 // component imports
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
+import Modal from "@/components/Modal";
 
 /* style imports */
 import styles from "./page.module.css";
@@ -155,7 +156,7 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-
+      <Modal data = {filteredData} />
       <MapBox data={filteredData} />
     </>
   );
