@@ -39,7 +39,8 @@ function MapBox({ data }) {
                 id: "meteorites-point",
                 type: "circle",
                 source: "points",
-                minzoom: 3,
+                maxzoom: 6,
+                minzoom: 1,
                 paint: {
                     "circle-radius": [
                         "interpolate",
@@ -60,8 +61,8 @@ function MapBox({ data }) {
                     "circle-color": "#f04800",
                     "circle-stroke-color": "#ffc8b0",
                     "circle-stroke-width": 1,
-                    "circle-stroke-opacity": 0.6,
-                    "circle-opacity": ["interpolate", ["linear"], ["zoom"], 3, 0, 4, 0.9],
+                    "circle-stroke-opacity": 0.2,
+                    "circle-opacity": ["interpolate", ["linear"], ["zoom"], 1, 0, 5, 0.7],
                 },
             });
 
@@ -102,15 +103,15 @@ function MapBox({ data }) {
                         0,
                         "rgba(255, 255, 255, 0)",
                         0.2,
-                        "rgba(255, 250, 200, 0.5)",
+                        "rgba(255, 200, 100, 0.3)",
                         0.4,
-                        "rgba(255, 200, 100, 0.7)",
+                        "rgba(255, 200, 100, 0.5)",
                         0.6,
-                        "rgba(255, 150, 50, 0.8)",
+                        "rgba(255, 150, 50, 0.6)",
                         0.8,
-                        "rgba(255, 100, 25, 0.9)",
+                        "rgba(255, 100, 25, 0.7)",
                         1,
-                        "rgba(255, 50, 0, 1)"
+                        "rgba(255, 50, 0, 0.8)"
                     ],
                     "heatmap-opacity": [
                         "interpolate",
@@ -119,9 +120,9 @@ function MapBox({ data }) {
                         0,
                         0.3,
                         4,
-                        0.7,
+                        0.6,
                         6,
-                        1
+                        0.9
                     ],
                 },
               });
