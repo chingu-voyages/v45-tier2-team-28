@@ -22,7 +22,6 @@ export default function Modal() {
                     location: await fetchLocationData(meteor.geolocation.latitude, meteor.geolocation.longitude),
                     
                 }
-                console.log(location)
             } else {
                 return meteor
             }
@@ -46,7 +45,7 @@ export default function Modal() {
 
   const fetchLocationData = async (latitude, longitude) => {
     try{
-        const baseUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=0cb197c667d74a29b3a4b26437f8d747`
+        // const baseUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=1094f81ea7b641efa1e00856cdc701bc`
         const response = await fetch(baseUrl)
         const data = await response.json()
         const location = data.features[0].properties.country
@@ -64,6 +63,7 @@ export default function Modal() {
             <table>
                 <thead>
                     <tr>
+                        <th>id</th>
                         <th>Name</th>
                         <th>Year of Strike</th>
                         <th>Meteorite Composition</th>
@@ -75,6 +75,7 @@ export default function Modal() {
                     {meteorList.map((meteor) => {
                         return(
                     <tr key={meteor.id}>
+                        <td>{meteor.id}</td>
                         <td>{meteor.name}</td>
                         <td>{meteor.year ? new Date (meteor.year).getFullYear(): ""}</td>
                         <td>{meteor.recclass}</td>

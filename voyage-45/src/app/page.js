@@ -26,7 +26,7 @@ export default function Home() {
       <h1>Home Page</h1>
       <Modal/>
       <Suspense fallback={<div>Loading map...</div>}>
-        {/* <MapBox /> */}
+       <MapBox />
       </Suspense>
     </>
   )
