@@ -3,8 +3,6 @@ import { useState, useEffect } from 'react'
 import styles from './styles/Modal.module.css'
 
 
-
-
 export default function Modal() {
   const [open, setOpen] = useState(true)
   const [meteorList, setMeteorList] = useState([])
@@ -63,7 +61,6 @@ export default function Modal() {
             <table>
                 <thead>
                     <tr>
-                        <th>id</th>
                         <th>Name</th>
                         <th>Year of Strike</th>
                         <th>Meteorite Composition</th>
@@ -75,7 +72,6 @@ export default function Modal() {
                     {meteorList.map((meteor) => {
                         return(
                     <tr key={meteor.id}>
-                        <td>{meteor.id}</td>
                         <td>{meteor.name}</td>
                         <td>{meteor.year ? new Date (meteor.year).getFullYear(): ""}</td>
                         <td>{meteor.recclass}</td>
