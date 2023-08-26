@@ -11,3 +11,37 @@ body {
   background-color: rgb(242, 228, 210);
 }
 
+/* Navagation Control */
+.mapboxgl-map {
+  position: relative;
+}
+.mapboxgl-ctrl-group {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mapboxgl-ctrl-zoom-in {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+  color:black;
+}
+.mapboxgl-ctrl-zoom-out {
+  background-color: white;
+  width: 20px;
+  height: 20px;
+}
+.mapboxgl-ctrl-compass {
+  background-color: teal;
+  width: 20px;
+  height: 20px;
+
+}
+.mapboxgl-ctrl-icon {
+  color:black;
+}
+/* end Nav Control */
+
