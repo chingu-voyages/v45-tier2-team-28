@@ -1,4 +1,4 @@
-import React, { useEffect, useState} from "react";
+import React, { useState, useEffect } from "react";
 import mapboxgl from 'mapbox-gl';
 
 // Styling
@@ -19,10 +19,13 @@ function MapBox({ data }) {
             style: "mapbox://styles/mapbox/navigation-night-v1",
             projection: "mercator",
             center: [60, 25],
-            zoom: 1,
+            zoom: 1, 
             // cooperativeGestures: true,
-            touchZoomRotate: { enableRotation: false },
+            touchZoomRotate: { enableRotation: false }
         });
+
+        // add navigation control (the +/- zoom buttons)
+        map.addControl(new mapboxgl.NavigationControl());
 
         map.on('load', () => {
             // Add data to the map as a source
@@ -125,7 +128,7 @@ function MapBox({ data }) {
                         0.9
                     ],
                 },
-              });
+            });
         });
         map.on('mousemove', 'meteorites-point', (e) => {
             if (e.features.length) {
