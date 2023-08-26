@@ -24,8 +24,11 @@ function MapBox({ data }) {
             touchZoomRotate: { enableRotation: false }
         });
 
+        map.setRenderWorldCopies(false);
+      
         // add navigation control (the +/- zoom buttons)
         map.addControl(new mapboxgl.NavigationControl());
+
 
         map.on('load', () => {
             // Add data to the map as a source
