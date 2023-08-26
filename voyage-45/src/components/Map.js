@@ -24,6 +24,8 @@ function MapBox({ data }) {
             touchZoomRotate: { enableRotation: false },
         });
 
+        map.setRenderWorldCopies(false);
+
         map.on('load', () => {
             // Add data to the map as a source
             map.addSource("points", {
