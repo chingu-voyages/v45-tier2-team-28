@@ -10,3 +10,11 @@
     background-origin: border-box;
     background-clip: content-box, border-box;
 }
+
+.mapboxgl-scroll-zoom-block{
+    display: none !important;
+}
+
+.mapboxgl-touch-pan-blocker{
+    display: none !important;
+}
