@@ -20,12 +20,11 @@ function MapBox({ data }) {
             projection: "mercator",
             center: [60, 25],
             zoom: 1, 
-            // cooperativeGestures: true,
-            touchZoomRotate: { enableRotation: false }
+            cooperativeGestures: true,
         });
 
         // add navigation control (the +/- zoom buttons)
-        map.addControl(new mapboxgl.NavigationControl());
+        map.addControl(new mapboxgl.NavigationControl({showCompass:false, showZoom:true}));
 
         map.on('load', () => {
             // Add data to the map as a source
