@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^4.40.1",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
     "mapbox-gl": "^2.15.0",
