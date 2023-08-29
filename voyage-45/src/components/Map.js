@@ -24,7 +24,7 @@ function MapBox({ data }) {
         });
 
         map.setRenderWorldCopies(false);
-      
+
         // add navigation control (the +/- zoom buttons)
         map.addControl(new mapboxgl.NavigationControl({showCompass:false, showZoom:true}));
 

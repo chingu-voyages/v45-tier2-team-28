@@ -1,3 +1,5 @@
+@import url("https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css");
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -12,7 +14,7 @@ body {
 }
 
 /* Navagation Control */
-.mapboxgl-map {
+/* .mapboxgl-map {
   position: relative;
 }
 .mapboxgl-ctrl-group {
@@ -42,6 +44,6 @@ body {
 }
 .mapboxgl-ctrl-icon {
   color:black;
-}
+} */
 /* end Nav Control */
 
