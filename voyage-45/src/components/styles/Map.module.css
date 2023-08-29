@@ -18,3 +18,9 @@
 .mapboxgl-touch-pan-blocker{
     display: none !important;
 }
+
+@media (min-width: 1400px) {
+    .mapContainer {
+        width: 48%; 
+    }
+}
