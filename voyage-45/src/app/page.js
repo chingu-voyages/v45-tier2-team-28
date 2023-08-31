@@ -6,6 +6,7 @@ import Head from "next/head";
 // component imports
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
+import AverageMass from "@/components/AverageMass";
 
 /* style imports */
 import styles from "./page.module.css";
@@ -157,6 +158,7 @@ export default function Home() {
       />
 
       <MapBox data={filteredData} />
+      <AverageMass data = {filteredData}/>
     </>
   );
 }
