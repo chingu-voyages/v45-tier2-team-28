@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import styles from './styles/Modal.module.css'
 
 
+
 export default function Modal() {
   const [open, setOpen] = useState(true)
   const [meteorList, setMeteorList] = useState([])
