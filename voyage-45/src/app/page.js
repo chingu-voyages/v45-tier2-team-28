@@ -25,6 +25,7 @@ export default function Home() {
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
   const [searchIsShowing, setSearchIsShowing] = useState(false);
+  const [locations, setLocations] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -45,6 +46,7 @@ export default function Home() {
             type: item.recclass,
             year: item.year,
             mass: parseFloat(item.mass || 0),
+            location: "Unknown"
           },
         }));
 
@@ -156,7 +158,7 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-      <Modal data = {filteredData} />
+      <Modal data={filteredData} />
       <MapBox data={filteredData} />
     </>
   );
