@@ -1,18 +1,17 @@
 import { useState, useEffect } from 'react'
+import fetchLocationData from '../app/helpers'
 
 import styles from './styles/Modal.module.css'
 
 
-export default function Modal() {
+export default function Modal(props) {
   const [open, setOpen] = useState(true)
   const [meteorList, setMeteorList] = useState([])
+  const geoAPI = process.env.NEXT_PUBLIC_GEOAPI;
 
-  const fetchMeteorData = async () => {
+  const fetchMeteorData = async (props) => {
     try {
-        const response = await fetch("https://data.nasa.gov/resource/gh4g-9sfh.json")
-        const data = await response.json()
-
-        const locationPromises = data.map(async(meteor) => {
+        const locationPromises = props.data.map(async(meteor) => {
             if (meteor.geolocation?.latitude && meteor.geolocation?.longitude){
 
                 return {
@@ -69,16 +68,16 @@ export default function Modal() {
                     </tr>
                 </thead>
                 <tbody>
-                    {meteorList.map((meteor) => {
+                    {props.data.map((meteor, index) => {
                         return(
-                    <tr key={meteor.id}>
-                        <td>{meteor.name}</td>
-                        <td>{meteor.year ? new Date (meteor.year).getFullYear(): ""}</td>
-                        <td>{meteor.recclass}</td>
-                        {meteor.mass ? 
-                            (<td>{Math.round(meteor.mass)}</td>) : (<td>Unknown</td>)
+                    <tr key={index}>
+                        <td>{meteor.properties.title}</td>
+                        <td>{meteor.properties.year ? new Date (meteor.properties.year).getFullYear(): ""}</td>
+                        <td>{meteor.properties.type}</td>
+                        {meteor.properties.mass ? 
+                            (<td>{Math.round(meteor.properties.mass)}</td>) : (<td>Unknown</td>)
                         }
-                        <td>{meteor.location}</td>
+                        <td>{meteor.properties.location}</td>
                     </tr>)
                     })}
 
