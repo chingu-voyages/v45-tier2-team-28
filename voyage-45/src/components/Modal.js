@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import fetchLocationData from '../app/helpers'
 
 import styles from './styles/Modal.module.css'
 
@@ -7,50 +6,48 @@ import styles from './styles/Modal.module.css'
 export default function Modal(props) {
   const [open, setOpen] = useState(true)
   const [meteorList, setMeteorList] = useState([])
-  const geoAPI = process.env.NEXT_PUBLIC_GEOAPI;
 
-  const fetchMeteorData = async (props) => {
-    try {
-        const locationPromises = props.data.map(async(meteor) => {
-            if (meteor.geolocation?.latitude && meteor.geolocation?.longitude){
+//   const fetchMeteorData = async (props) => {
+//     try {
+//         const locationPromises = props.data.map(async(meteor) => {
+//             if (meteor.geolocation?.latitude && meteor.geolocation?.longitude){
 
-                return {
-                    ...meteor,
-                    location: await fetchLocationData(meteor.geolocation.latitude, meteor.geolocation.longitude),
+//                 return {
+//                     ...meteor,
+//                     location: await fetchLocationData(meteor.geolocation.latitude, meteor.geolocation.longitude),
                     
-                }
-            } else {
-                return meteor
-            }
-        })
+//                 }
+//             } else {
+//                 return meteor
+//             }
+//         })
 
-        const settledPromises = await Promise.allSettled(locationPromises)
+//         const settledPromises = await Promise.allSettled(locationPromises)
 
-        const meteorDataWithLocation = settledPromises.filter((result) => result.status === 'fulfilled').map((result)=> result.value)
+//         const meteorDataWithLocation = settledPromises.filter((result) => result.status === 'fulfilled').map((result)=> result.value)
 
-        setMeteorList(meteorDataWithLocation)
+//         setMeteorList(meteorDataWithLocation)
 
-    } catch (error) {
-        console.error("Error fetching data", error)
-    }
-  }
+//     } catch (error) {
+//         console.error("Error fetching data", error)
+//     }
+//   }
 
 
-  useEffect(() => {
-    fetchMeteorData()
-  }, [])
+//   useEffect(() => {
+//     fetchMeteorData()
+//   }, [])
 
-  const fetchLocationData = async (latitude, longitude) => {
-    try{
-        // const baseUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=1094f81ea7b641efa1e00856cdc701bc`
-        const response = await fetch(baseUrl)
-        const data = await response.json()
-        const location = data.features[0].properties.country
-        return location
-    } catch (error) {
-        console.error("Error fetching location data", error)
-    }
-  }
+//   const fetchLocationData = async () => {
+//     try{
+//         const response = await fetch(baseUrl)
+//         const data = await response.json()
+//         const location = data.features[0].properties.country
+//         return location
+//     } catch (error) {
+//         console.error("Error fetching location data", error)
+//     }
+//   }
 
   return ( open ?
     <div className={styles.modal}>

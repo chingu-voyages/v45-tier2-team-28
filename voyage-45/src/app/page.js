@@ -7,9 +7,12 @@ import Head from "next/head";
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import Modal from "@/components/Modal";
+import fetchLocationData from '../app/helpers';
+
 
 /* style imports */
 import styles from "./page.module.css";
+import { Truculenta } from "next/font/google";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -25,7 +28,11 @@ export default function Home() {
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
   const [searchIsShowing, setSearchIsShowing] = useState(false);
+  const [searchLocations, setSearchLocations] = useState([]);
   const [locations, setLocations] = useState([]);
+  const [needsUpdated, setNeedsUpdated] = useState(true);
+  const geoAPI = process.env.NEXT_PUBLIC_GEOAPI;
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,16 +57,61 @@ export default function Home() {
           },
         }));
 
+        setSearchLocations((prevSearchLocations) => [
+          ...prevSearchLocations,
+          ...mapPoints.map((item) => ({
+            params: {
+              lat: item.geometry.coordinates[1],
+              lon: item.geometry.coordinates[0],
+            },
+          })),
+        ]);
+
+
         setData(mapPoints);
         setFilteredData(mapPoints);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
+
     };
 
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if(needsUpdated && searchLocations.length > 0)
+    {
+      const returned = fetchLocationData(searchLocations, geoAPI);
+      setLocations(returned);
+      setNeedsUpdated(false);
+    }
+  }, [data])
+
+  useEffect(() => {
+    if(locations.length > 0)
+    {
+      setData((prevData) => {
+        return prevData.map((prev, index) => {
+          // Check if the index is within the bounds of the 'locations' array
+          if (index < locations.length) {
+            const locationInfo = locations[index];
+            console.log(locationInfo.results[0]);
+            // Update the 'location' property with the location information
+            return {
+              ...prev,
+              location: locationInfo.results[0] // Adjust the path to the location data as needed
+            };
+          }
+          // If there is no corresponding location, return the original data
+          return prev;
+        });
+      });
+    }
+  }, [locations])
+  
+  console.log(locations);
   const handleSubmit = (e) => {
     e.preventDefault();
     filterBar();
@@ -158,7 +210,7 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-      <Modal data={filteredData} />
+      <Modal data={filteredData} search={searchLocations}/>
       <MapBox data={filteredData} />
     </>
   );
