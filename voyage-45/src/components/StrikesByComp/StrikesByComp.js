@@ -6,7 +6,7 @@ function StrikesByComp(props) {
   const [dataSet, setDataSet] = useState([]);
 
   useEffect(() => {
-    // Extract unique types using Set
+    // Extract unique types using Set for the pie labels
     const labels = [...new Set(props.data.map(item => item.properties.type))];
 
     // Calculate the count for each type
@@ -30,7 +30,7 @@ function StrikesByComp(props) {
           label: 'Strikes by Composition',
           data: typeCounts.map(item => item.count), // Use typeCounts for data
           backgroundColor: backgroundColors, // Use the generated colors
-          hoverOffset: 4,
+          hoverOffset: 15,
         },
       ],
     };
@@ -41,7 +41,7 @@ function StrikesByComp(props) {
     });
 
     return () => {
-      // Destroy the Chart.js instance when the component unmounts
+      // Destroy the Chart.js instance when the component unmounts or data alters
       chart.destroy();
     };
   }, [props.data]); // Run this effect whenever props.data changes
