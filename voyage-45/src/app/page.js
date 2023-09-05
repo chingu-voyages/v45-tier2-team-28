@@ -7,8 +7,7 @@ import Head from "next/head";
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import Modal from "@/components/Modal";
-import fetchLocationData from '../app/helpers';
-
+import fetchLocationData from "../app/helpers";
 
 /* style imports */
 import styles from "./page.module.css";
@@ -33,7 +32,6 @@ export default function Home() {
   const [needsUpdated, setNeedsUpdated] = useState(true);
   const geoAPI = process.env.NEXT_PUBLIC_GEOAPI;
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -53,7 +51,7 @@ export default function Home() {
             type: item.recclass,
             year: item.year,
             mass: parseFloat(item.mass || 0),
-            location: "Unknown"
+            location: "Unknown",
           },
         }));
 
@@ -61,57 +59,95 @@ export default function Home() {
           ...prevSearchLocations,
           ...mapPoints.map((item) => ({
             params: {
-              lat: item.geometry.coordinates[1],
-              lon: item.geometry.coordinates[0],
+              lat: item?.geometry?.coordinates[1],
+              lon: item?.geometry?.coordinates[0],
             },
           })),
         ]);
 
-
         setData(mapPoints);
         setFilteredData(mapPoints);
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-
     };
 
     fetchData();
   }, []);
 
   useEffect(() => {
-    if(needsUpdated && searchLocations.length > 0)
-    {
-      const returned = fetchLocationData(searchLocations, geoAPI);
-      setLocations(returned);
-      setNeedsUpdated(false);
-    }
-  }, [data])
+    const updateLocations = async () => {
+      if (needsUpdated && searchLocations.length > 0) {
+        const returned = await fetchLocationData(searchLocations, geoAPI);
+        console.log(returned);
+        setLocations(returned);
+        setNeedsUpdated(false);
+      }
+    };
+    updateLocations();
+  }, [data]);
 
   useEffect(() => {
-    if(locations.length > 0)
-    {
+    console.log("Called to check locations");
+    if (locations !== []) {
       setData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
-          if (index < locations.length) {
-            const locationInfo = locations[index];
-            console.log(locationInfo.results[0]);
-            // Update the 'location' property with the location information
+          const locationInfo = locations.results[index];
+          try {
+            if (locationInfo.result.features[0].properties.country) {
+          console.log(locationInfo.result.features[0].properties.country);
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.country,
+                }
+              };
+            }
+          } catch (error) {
+            console.log(error);
             return {
               ...prev,
-              location: locationInfo.results[0] // Adjust the path to the location data as needed
+                properties: {
+                ...prev.properties,
+                  location: "Unknown",
+                }
             };
           }
-          // If there is no corresponding location, return the original data
-          return prev;
+        });
+      });
+      setFilteredData((prevData) => {
+        return prevData.map((prev, index) => {
+          // Check if the index is within the bounds of the 'locations' array
+          const locationInfo = locations.results[index];
+          try {
+            if (locationInfo.result.features[0].properties.country) {
+          console.log(locationInfo.result.features[0].properties.country);
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.country,
+                }
+              };
+            }
+          } catch (error) {
+            console.log(error);
+            return {
+              ...prev,
+                properties: {
+                ...prev.properties,
+                  location: "Unknown",
+                }
+            };
+          }
         });
       });
     }
-  }, [locations])
-  
-  console.log(locations);
+  }, [locations]);
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
     filterBar();
@@ -128,9 +164,13 @@ export default function Home() {
           item.properties.title
             .toLowerCase()
             .includes(filterName.toLowerCase()) &&
-            item.properties.year &&
-          item.properties.year.toLowerCase().includes(stringYear.toLowerCase()) &&
-          item.properties.type.toLowerCase().includes(filterClass.toLowerCase()) &&
+          item.properties.year &&
+          item.properties.year
+            .toLowerCase()
+            .includes(stringYear.toLowerCase()) &&
+          item.properties.type
+            .toLowerCase()
+            .includes(filterClass.toLowerCase()) &&
           item.properties.mass >= lowMass &&
           item.properties.mass <= highMass
         ) {
@@ -150,20 +190,20 @@ export default function Home() {
 
   const handleTypeChange = (e) => {
     setFilterClass(e.target.value);
-  }
+  };
 
   const handleMassChange = (e) => {
     const { name, checked, value } = e.target;
     const [start, end] = value.split("-").map(Number);
     setFilterMass({
-      small: name === 'small' ? checked : false,
-      mid: name === 'mid' ? checked : false,
-      large: name === 'large' ? checked : false
+      small: name === "small" ? checked : false,
+      mid: name === "mid" ? checked : false,
+      large: name === "large" ? checked : false,
     });
     setLowMass(start);
     setHighMass(end);
-    }
-    // setFilterMass({ ...filterMass, [e.target.name]: e.target.checked });
+  };
+  // setFilterMass({ ...filterMass, [e.target.name]: e.target.checked });
 
   const clear = (e) => {
     e.preventDefault();
@@ -174,16 +214,16 @@ export default function Home() {
     setFilterMass({
       small: false,
       mid: false,
-      large: false
-    })
+      large: false,
+    });
     setLowMass(0);
     setHighMass(1000000);
-  }
+  };
 
   const toggleSearchBar = (e) => {
     e.preventDefault();
     setSearchIsShowing(!searchIsShowing);
-  }
+  };
 
   console.log(filteredData.length);
 
@@ -197,8 +237,8 @@ export default function Home() {
       </Head>
 
       <Navbar
-      toggleSearchBar={toggleSearchBar}
-      searchIsShowing={searchIsShowing}
+        toggleSearchBar={toggleSearchBar}
+        searchIsShowing={searchIsShowing}
         submit={handleSubmit}
         name={filterName}
         updateName={handleNameChange}
@@ -210,7 +250,7 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-      <Modal data={filteredData} search={searchLocations}/>
+      <Modal data={filteredData} search={searchLocations} />
       <MapBox data={filteredData} />
     </>
   );
