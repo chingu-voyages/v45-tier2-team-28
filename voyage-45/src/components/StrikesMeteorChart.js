@@ -87,9 +87,11 @@ function StrikesMeteorChart({ dataByYear }) {
   };
 
   return (
-    <div className={styles.chartContainer}>
-      <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
-    </div>
+    <>
+      <div className={styles.chartContainer}>
+        <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
+      </div>
+    </>
   );
 }
 

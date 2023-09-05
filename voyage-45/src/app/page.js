@@ -167,7 +167,6 @@ export default function Home() {
       />
 
       <MapBox data={filteredData} />
-
       <StrikesMeteorChart dataByYear={chartDataByYear} />
 
     </>
