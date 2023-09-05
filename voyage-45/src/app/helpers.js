@@ -1,4 +1,5 @@
 const fetchLocationData = async (batchData, geoAPI) => {
+  let resultingData = {};
   const search = {
     "api": "/v1/geocode/reverse",
     "params": {
@@ -10,7 +11,7 @@ const fetchLocationData = async (batchData, geoAPI) => {
 
   try{
     const baseUrl = `https://api.geoapify.com/v1/batch?apiKey=${geoAPI}`;
-    const returned = await fetch(baseUrl, {
+   resultingData = await fetch(baseUrl, {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -72,6 +73,7 @@ const fetchLocationData = async (batchData, geoAPI) => {
             .catch((err) => reject(err));
         }
       }
+      return resultingData;
   };
 
   export default fetchLocationData;

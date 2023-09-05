@@ -7,47 +7,6 @@ export default function Modal(props) {
   const [open, setOpen] = useState(true)
   const [meteorList, setMeteorList] = useState([])
 
-//   const fetchMeteorData = async (props) => {
-//     try {
-//         const locationPromises = props.data.map(async(meteor) => {
-//             if (meteor.geolocation?.latitude && meteor.geolocation?.longitude){
-
-//                 return {
-//                     ...meteor,
-//                     location: await fetchLocationData(meteor.geolocation.latitude, meteor.geolocation.longitude),
-                    
-//                 }
-//             } else {
-//                 return meteor
-//             }
-//         })
-
-//         const settledPromises = await Promise.allSettled(locationPromises)
-
-//         const meteorDataWithLocation = settledPromises.filter((result) => result.status === 'fulfilled').map((result)=> result.value)
-
-//         setMeteorList(meteorDataWithLocation)
-
-//     } catch (error) {
-//         console.error("Error fetching data", error)
-//     }
-//   }
-
-
-//   useEffect(() => {
-//     fetchMeteorData()
-//   }, [])
-
-//   const fetchLocationData = async () => {
-//     try{
-//         const response = await fetch(baseUrl)
-//         const data = await response.json()
-//         const location = data.features[0].properties.country
-//         return location
-//     } catch (error) {
-//         console.error("Error fetching location data", error)
-//     }
-//   }
 
   return ( open ?
     <div className={styles.modal}>
@@ -68,13 +27,13 @@ export default function Modal(props) {
                     {props.data.map((meteor, index) => {
                         return(
                     <tr key={index}>
-                        <td>{meteor.properties.title}</td>
-                        <td>{meteor.properties.year ? new Date (meteor.properties.year).getFullYear(): ""}</td>
-                        <td>{meteor.properties.type}</td>
-                        {meteor.properties.mass ? 
-                            (<td>{Math.round(meteor.properties.mass)}</td>) : (<td>Unknown</td>)
+                        <td>{meteor?.properties?.title}</td>
+                        <td>{meteor?.properties?.year ? new Date (meteor.properties.year).getFullYear(): ""}</td>
+                        <td>{meteor?.properties?.type}</td>
+                        {meteor?.properties?.mass ? 
+                            (<td>{Math.round(meteor?.properties?.mass)}</td>) : (<td>Unknown</td>)
                         }
-                        <td>{meteor.properties.location}</td>
+                        <td>{meteor?.properties?.location}</td>
                     </tr>)
                     })}
 
