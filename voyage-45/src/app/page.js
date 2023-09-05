@@ -6,6 +6,10 @@ import Head from "next/head";
 // component imports
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
+import StrikesMeteorChart from "@/components/StrikesMeteorChart";
+
+// utils 
+import { processDataByYear } from "@/utils/processMeteorData";
 
 /* style imports */
 import styles from "./page.module.css";
@@ -24,6 +28,9 @@ export default function Home() {
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
   const [searchIsShowing, setSearchIsShowing] = useState(false);
+  
+  // chart data
+  const [chartDataByYear, setChartDataByYear] = useState({});
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,6 +56,9 @@ export default function Home() {
 
         setData(mapPoints);
         setFilteredData(mapPoints);
+
+        const chartData = processDataByYear(mapPoints);
+        setChartDataByYear(chartData);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -157,6 +167,9 @@ export default function Home() {
       />
 
       <MapBox data={filteredData} />
+
+      <StrikesMeteorChart dataByYear={chartDataByYear} />
+
     </>
   );
 }
