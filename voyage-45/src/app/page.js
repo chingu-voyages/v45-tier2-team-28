@@ -10,6 +10,8 @@ import StrikesMeteorChart from "@/components/StrikesMeteorChart";
 
 // utils 
 import { processDataByYear } from "@/utils/processMeteorData";
+import AverageMass from "@/components/AverageMass";
+
 
 /* style imports */
 import styles from "./page.module.css";
@@ -167,8 +169,9 @@ export default function Home() {
       />
 
       <MapBox data={filteredData} />
-      <StrikesMeteorChart dataByYear={chartDataByYear} />
 
+      <StrikesMeteorChart dataByYear={chartDataByYear} />
+      <AverageMass data = {filteredData}/>
     </>
   );
 }
