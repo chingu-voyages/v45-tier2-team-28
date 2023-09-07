@@ -49,7 +49,7 @@ export default function Home() {
           properties: {
             title: item.name,
             type: item.recclass,
-            year: item.year,
+            year: item.year || "Unknown",
             mass: parseFloat(item.mass || 0),
             location: "Unknown",
           },
@@ -104,6 +104,23 @@ export default function Home() {
                   location: locationInfo.result.features[0].properties.country,
                 }
               };
+              //If no location return unknown -test
+            }if(locationInfo.result.features[0].properties.ocean){ 
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.ocean,
+                }
+              };
+            }else {
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: "Unknown",
+                }
+              };
             }
           } catch (error) {
             console.log(error);
@@ -131,6 +148,23 @@ export default function Home() {
                   location: locationInfo.result.features[0].properties.country,
                 }
               };
+              //If no location return unknown -test
+            }if(locationInfo.result.features[0].properties.ocean){ 
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.ocean,
+                }
+              };
+            }else {
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: "Unknown",
+                }
+              };
             }
           } catch (error) {
             console.log(error);
@@ -146,6 +180,7 @@ export default function Home() {
       });
     }
   }, [locations]);
+
 
 
   const handleSubmit = (e) => {
@@ -172,7 +207,8 @@ export default function Home() {
             .toLowerCase()
             .includes(filterClass.toLowerCase()) &&
           item.properties.mass >= lowMass &&
-          item.properties.mass <= highMass
+          item.properties.mass <= highMass &&
+          item.properties.location.toLowerCase().includes(filterName.toLowerCase())
         ) {
           return item;
         }
@@ -250,8 +286,8 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
+        <MapBox data={filteredData} />
       <Modal data={filteredData} search={searchLocations} />
-      <MapBox data={filteredData} />
     </>
   );
 }
