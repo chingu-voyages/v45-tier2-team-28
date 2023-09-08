@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@netlify/plugin-nextjs": "^4.40.1",
+    "chart.js": "^4.4.0",
     "eslint": "8.47.0",
     "eslint-config-next": "13.4.13",
     "mapbox-gl": "^2.15.0",
