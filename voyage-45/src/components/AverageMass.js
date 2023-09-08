@@ -1,3 +1,11 @@
+import { Bar } from 'react-chartjs-2'
+import { CategoryScale, Chart, registerables } from 'chart.js'
+
+Chart.register(...registerables)
+Chart.register(CategoryScale)
+
+
+
 function AverageMass(props) {
 
     const calculateAvg = (list) => {
@@ -36,34 +44,27 @@ function AverageMass(props) {
   let largeAvg = calculateAvg(largeList)
   let totalAvg = calculateAvg(props.data)
 
+  const data = {
+    labels: ['Small', 'Medium', 'Large', 'Total'],
+    datasets: [{
+      label: 'Average Mass',
+      data: [smallAvg, medAvg, largeAvg, totalAvg],
+      borderWidth: 1
+    }]
+  }
+
+  const options = {
+    plugins: {
+      title: {
+        display: true,
+        text: 'Average Mass'
+      }
+    }
+  }
+
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Average Mass</th>
-            </tr>
-          </thead>
-          <tbody>
-          <tr>
-                <td>Small</td>
-                <td>{smallAvg.toString()}</td>
-              </tr>
-              <tr>
-                <td>Medium</td>
-                <td>{medAvg.toString()}</td>
-              </tr>
-              <tr>
-                <td>Large</td>
-                <td>{largeAvg.toString()}</td>
-              </tr>
-              <tr>
-                <td>Total</td>
-                <td>{totalAvg.toString()}</td>
-              </tr>
-          </tbody>
-        </table>
+        <Bar data={data} options={options} />
       </div>
     );
   }
