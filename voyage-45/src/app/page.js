@@ -7,11 +7,11 @@ import Head from "next/head";
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import StrikesMeteorChart from "@/components/StrikesMeteorChart";
+import MeteorInfo from "@/components/MeteorInfo";
 
-// utils 
+// utils
 import { processDataByYear } from "@/utils/processMeteorData";
 import AverageMass from "@/components/AverageMass";
-
 
 /* style imports */
 import styles from "./page.module.css";
@@ -30,7 +30,7 @@ export default function Home() {
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
   const [searchIsShowing, setSearchIsShowing] = useState(false);
-  
+
   // chart data
   const [chartDataByYear, setChartDataByYear] = useState({});
 
@@ -85,9 +85,13 @@ export default function Home() {
           item.properties.title
             .toLowerCase()
             .includes(filterName.toLowerCase()) &&
-            item.properties.year &&
-          item.properties.year.toLowerCase().includes(stringYear.toLowerCase()) &&
-          item.properties.type.toLowerCase().includes(filterClass.toLowerCase()) &&
+          item.properties.year &&
+          item.properties.year
+            .toLowerCase()
+            .includes(stringYear.toLowerCase()) &&
+          item.properties.type
+            .toLowerCase()
+            .includes(filterClass.toLowerCase()) &&
           item.properties.mass >= lowMass &&
           item.properties.mass <= highMass
         ) {
@@ -107,20 +111,20 @@ export default function Home() {
 
   const handleTypeChange = (e) => {
     setFilterClass(e.target.value);
-  }
+  };
 
   const handleMassChange = (e) => {
     const { name, checked, value } = e.target;
     const [start, end] = value.split("-").map(Number);
     setFilterMass({
-      small: name === 'small' ? checked : false,
-      mid: name === 'mid' ? checked : false,
-      large: name === 'large' ? checked : false
+      small: name === "small" ? checked : false,
+      mid: name === "mid" ? checked : false,
+      large: name === "large" ? checked : false,
     });
     setLowMass(start);
     setHighMass(end);
-    }
-    // setFilterMass({ ...filterMass, [e.target.name]: e.target.checked });
+  };
+  // setFilterMass({ ...filterMass, [e.target.name]: e.target.checked });
 
   const clear = (e) => {
     e.preventDefault();
@@ -131,16 +135,16 @@ export default function Home() {
     setFilterMass({
       small: false,
       mid: false,
-      large: false
-    })
+      large: false,
+    });
     setLowMass(0);
     setHighMass(1000000);
-  }
+  };
 
   const toggleSearchBar = (e) => {
     e.preventDefault();
     setSearchIsShowing(!searchIsShowing);
-  }
+  };
 
   console.log(filteredData.length);
 
@@ -154,8 +158,8 @@ export default function Home() {
       </Head>
 
       <Navbar
-      toggleSearchBar={toggleSearchBar}
-      searchIsShowing={searchIsShowing}
+        toggleSearchBar={toggleSearchBar}
+        searchIsShowing={searchIsShowing}
         submit={handleSubmit}
         name={filterName}
         updateName={handleNameChange}
@@ -168,10 +172,21 @@ export default function Home() {
         clear={clear}
       />
 
-      <MapBox data={filteredData} />
+      <p className={styles.introductionParagraph}>
+        Welcome to Fireball! Our goal is to shed light on the fascinating world
+        of meteor strikes, offering a comprehensive view of data collected by
+        NASA with over a 1000 strikes stretching back in time to the 1400s!
+        Whether you're an astronomy enthusiast, a curious student, or simply
+        intrigued by the mysteries of the universe, this platform provides an
+        interactive experience to explore and learn about meteors, their dynamic
+        sizes, impacts, and much more. Dive in and discover the cosmic wonders
+        of our planet!
+      </p>
 
+      <MapBox data={filteredData} />
+      <MeteorInfo />
       <StrikesMeteorChart dataByYear={chartDataByYear} />
-      <AverageMass data = {filteredData}/>
+      <AverageMass data={filteredData} />
     </>
   );
 }

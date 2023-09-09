@@ -7,6 +7,20 @@
   min-height: 100vh;
 }
 
+.introductionParagraph {
+  background-color: rgba(var(--callout-rgb), 0.5);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
+  background-color: rgba(var(--callout-rgb), 0.5);
+  margin-bottom: 2rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  max-width: 900px;
+  width: 100%;
+  text-align: center;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
@@ -97,7 +111,7 @@
 
 .center::before,
 .center::after {
-  content: '';
+  content: "";
   left: 50%;
   position: absolute;
   filter: blur(45px);
