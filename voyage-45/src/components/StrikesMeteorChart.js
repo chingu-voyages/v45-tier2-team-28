@@ -1,5 +1,6 @@
 import { Bar } from 'react-chartjs-2';
 import { CategoryScale, Chart, registerables } from "chart.js";
+import { useState } from 'react';
 
 Chart.register(...registerables);
 Chart.register(CategoryScale);
@@ -7,33 +8,34 @@ Chart.register(CategoryScale);
 /* styles */
 import styles from './styles/StrikesMeteorChart.module.css';
 
-
 function StrikesMeteorChart({ dataByYear }) {
+  const NUM_YEARS_DISPLAYED = 25;
   const years = Object.keys(dataByYear).sort();
-  const smallData = years.map(year => dataByYear[year].small);
-  const mediumData = years.map(year => dataByYear[year].medium);
-  const largeData = years.map(year => dataByYear[year].large);
+
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const visibleYears = isExpanded ? years : years.slice(-NUM_YEARS_DISPLAYED);
 
   const chartData = {
-    labels: years,
+    labels: visibleYears,
     datasets: [
       {
         label: 'Small',
-        data: smallData,
+        data: visibleYears.map(year => dataByYear[year].small),
         backgroundColor: '#BFACAA',
         borderColor: '#8E7C77',
         borderWidth: 1
       },
       {
         label: 'Medium',
-        data: mediumData,
+        data: visibleYears.map(year => dataByYear[year].medium),
         backgroundColor: '#05204A',
         borderColor: '#041430',
         borderWidth: 1
       },
       {
         label: 'Large',
-        data: largeData,
+        data: visibleYears.map(year => dataByYear[year].large),
         backgroundColor: '#B497D6',
         borderColor: '#9C75C2',
         borderWidth: 1
@@ -48,7 +50,9 @@ function StrikesMeteorChart({ dataByYear }) {
         beginAtZero: true,
         grid: {
           display: false
-        }
+        },
+        barPercentage: 0.5,
+        categoryPercentage: 1,
       },
       y: {
         type: 'linear',
@@ -88,7 +92,10 @@ function StrikesMeteorChart({ dataByYear }) {
 
   return (
     <>
-      <div className={styles.chartContainer}>
+      <button onClick={() => setIsExpanded(!isExpanded)}>
+          {isExpanded ? "Show Last 10 Years" : "Show All"}
+      </button>
+      <div className={isExpanded ? `${styles.chartContainer} ${styles.expanded}` : styles.chartContainer}>
         <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
       </div>
     </>
