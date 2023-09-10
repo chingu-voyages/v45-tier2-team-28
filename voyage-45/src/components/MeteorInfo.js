@@ -59,7 +59,7 @@ function MeteorInfo() {
         TV
         <br />
         <span className={styles.meteorInfoStrong}>100 kg:</span> Standard
-        regrigerator
+        refrigerator
         <br />
         <span className={styles.meteorInfoStrong}>500 kg:</span> Concert grand
         piano
