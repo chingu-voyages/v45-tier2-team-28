@@ -9,7 +9,7 @@ Chart.register(CategoryScale);
 import styles from './styles/StrikesMeteorChart.module.css';
 
 function StrikesMeteorChart({ dataByYear }) {
-  const NUM_YEARS_DISPLAYED = 25;
+  const NUM_YEARS_DISPLAYED = 20;
   const years = Object.keys(dataByYear).sort();
 
   const [isExpanded, setIsExpanded] = useState(false);
