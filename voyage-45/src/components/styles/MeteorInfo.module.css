@@ -1,0 +1,40 @@
+.meteorInfoContainer {
+  background-color: #f7f9fc;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.meteorInfoHeader,
+.meteorInfoSubHeader {
+  color: #333;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.meteorInfoParagraph {
+  color: #555;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+.meteorInfoList {
+  padding-left: 20px;
+  color: #555;
+  font-size: 16px;
+}
+
+.meteorInfoListItem {
+  margin-bottom: 10px;
+}
+
+.meteorInfoStrong {
+  color: #222;
+}
+
+.meteorInfoItalicParagraph {
+  font-style: italic;
+}

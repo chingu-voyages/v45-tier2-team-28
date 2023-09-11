@@ -1,39 +1,39 @@
-const fetchLocationData = async (batchData, geoAPi) => {
-    const sendData = {
-      api: "/v1/geocode/reverse",
-      params: {
-        lang: "en",
-        limit: "10",
+const fetchLocationData = async (batchData, geoAPI) => {
+  let resultingData = {};
+  const search = {
+    "api": "/v1/geocode/reverse",
+    "params": {
+      "lang": "en",
+      "limit": "1"
+    },
+    "inputs": batchData
+  };
+
+  try{
+    const baseUrl = `https://api.geoapify.com/v1/batch?apiKey=${geoAPI}`;
+   resultingData = await fetch(baseUrl, {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
-      inputs: batchData,
-    };
-    try {
-      const baseUrl = `https://api.geoapify.com/v1/batch?apiKey=${geoAPi}`;
-      
-      fetch(baseUrl, {
-        method: "post",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(sendData),
-      })
-        .then(getBodyAndStatus)
-        .then((result) => {
-          if (result.status !== 202) {
-            return Promise.reject(result);
-          } else {
-            return getAsyncResult(
-              `${baseUrl}&id=${result.body.id}`,
-              5000,
-              100
-            ).then((queryResult) => {
-            //   console.log(queryResult);
-              return queryResult;
-            });
-          }
-        })
-        .catch((err) => console.log(err));
+      body: JSON.stringify(search)
+    })
+    .then(getBodyAndStatus)
+    .then((result) => {
+      if (result.status !== 202) {
+        return Promise.reject(result)
+      } else {
+        return getAsyncResult(`${baseUrl}&id=${result.body.id}`, 5000, 100).then(queryResult => {
+          console.log(queryResult);
+          return queryResult;
+        });
+      }
+    })
+    .catch(err => console.log(err));
+  }catch(error) {
+    console.log(error);
+  }
 
         function getBodyAndStatus(response) {
           return response.json().then((responceBody) => {
@@ -73,10 +73,7 @@ const fetchLocationData = async (batchData, geoAPi) => {
             .catch((err) => reject(err));
         }
       }
-    } catch (error) {
-      console.error("Error fetching location data", error);
-      return "Unknown";
-    }
+      return resultingData;
   };
 
   export default fetchLocationData;

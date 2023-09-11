@@ -24,15 +24,15 @@ function FilterBar(props) {
           <label for="mass-range">Mass Range</label>
           <div className={styles.checkbox}>
             <span>Small</span>
-            <input onChange={props.updateSelected} name="small" checked={props.mass.small} type="radio" value="0-1000"/>
+            <input onChange={props.updateSelected} name="small" checked={props.mass.small} type="radio" value="0-999"/>
           </div>
           <div className={styles.checkbox}>
             <span>Mid</span>
-            <input onChange={props.updateSelected} name="mid" checked={props.mass.mid} type="radio" value="1000-10000"/>
+            <input onChange={props.updateSelected} name="mid" checked={props.mass.mid} type="radio" value="1000-9999"/>
           </div>
           <div className={styles.checkbox}>
             <span>Large</span>
-            <input onChange={props.updateSelected} name="large" checked={props.mass.large} type="radio" value="10000-1000000"/>
+            <input onChange={props.updateSelected} name="large" checked={props.mass.large} type="radio" value="10000-100000000"/>
           </div>
         </div>
         <button type="submit" className={styles.button}>
