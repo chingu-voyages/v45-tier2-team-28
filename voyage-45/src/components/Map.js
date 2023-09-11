@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
-import mapboxgl from 'mapbox-gl';
+import React, { useState, useEffect  } from "react";
+import mapboxgl from "mapbox-gl";
 
 // Styling
 import styles from "./styles/Map.module.css";
-import tooltipStyles from "./styles/Tooltip.module.css"
+import tooltipStyles from "./styles/Tooltip.module.css";
 
 // Ensure Mapbox access token is set
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_API_KEY;
 
 function MapBox({ data }) {
-
-    const [tooltip, setTooltip] = useState({ display: false, content: "", x: 0, y: 0 });
-
+  const [tooltip, setTooltip] = useState({
+    display: false,
+    content: "",
+    x: 0,
+    y: 0,
+  });
 
     useEffect(() => {
         const map = new mapboxgl.Map({
@@ -29,15 +32,18 @@ function MapBox({ data }) {
         map.addControl(new mapboxgl.NavigationControl({showCompass:false, showZoom:true}));
 
 
-        map.on('load', () => {
-            // Add data to the map as a source
-            map.addSource("points", {
-                type: "geojson",
-                data: {
-                    type: "FeatureCollection",
-                    features: data,
-                }
-            });
+    console.log("Map receieves: ");
+    console.log(data);
+
+    map.on("load", () => {
+      // Add data to the map as a source
+      map.addSource("points", {
+        type: "geojson",
+        data: {
+          type: "FeatureCollection",
+          features: data,
+        },
+      });
 
             // Layer and Paint configurations (same as previous)
             map.addLayer({
@@ -140,45 +146,45 @@ function MapBox({ data }) {
                     <strong>Name: ${feature.properties.title}</strong><br/>
                     Mass: ${feature.properties.mass} grams
                 `;
-                
-                setTooltip({
-                    display: true,
-                    content: HTML,
-                    x: e.point.x,
-                    y: e.point.y
-                });
-            }
+
+        setTooltip({
+          display: true,
+          content: HTML,
+          x: e.point.x,
+          y: e.point.y,
         });
+      }
+    });
 
-        // Add mouseleave event to hide tooltip
-        map.on('mouseleave', 'meteorites-point', () => {
-            setTooltip({ display: false, content: "", x: 0, y: 0 });
-        });
+    // Add mouseleave event to hide tooltip
+    map.on("mouseleave", "meteorites-point", () => {
+      setTooltip({ display: false, content: "", x: 0, y: 0 });
+    });
 
-        map.touchZoomRotate.disable();
+    map.touchZoomRotate.disable();
 
-        return () => {
-            map.remove();
-        };
-    }, [data]);
+    return () => {
+      map.remove();
+    };
+  }, [data]);
 
-    return (
-        <div className={styles.mapContainer}>
-            <div id="map" style={{ width: "100%", height: "100%" }} />
-            
-            {tooltip.display && (
-                <div
-                    className={tooltipStyles.tooltip}
-                    style={{
-                        position: 'absolute',
-                        left: `${tooltip.x}px`,
-                        top: `${tooltip.y}px`,
-                        transform: 'translate(-50%, -100%)'
-                    }}
-                    dangerouslySetInnerHTML={{ __html: tooltip.content }}
-                />
-            )}
-        </div>
-    );
+  return (
+    <div className={styles.mapContainer}>
+      <div id="map" style={{ width: "100%", height: "100%" }} />
+
+      {tooltip.display && (
+        <div
+          className={tooltipStyles.tooltip}
+          style={{
+            position: "absolute",
+            left: `${tooltip.x}px`,
+            top: `${tooltip.y}px`,
+            transform: "translate(-50%, -100%)",
+          }}
+          dangerouslySetInnerHTML={{ __html: tooltip.content }}
+        />
+      )}
+    </div>
+  );
 }
 export default MapBox;

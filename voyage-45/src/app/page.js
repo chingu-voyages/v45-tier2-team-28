@@ -12,9 +12,12 @@ import MeteorInfo from "@/components/MeteorInfo";
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";
 import AverageMass from "@/components/AverageMass";
+import Modal from "@/components/Modal";
+import fetchLocationData from "../app/helpers";
 
 /* style imports */
 import styles from "./page.module.css";
+import { Truculenta } from "next/font/google";
 
 export default function Home() {
   const [data, setData] = useState([]);
@@ -30,6 +33,11 @@ export default function Home() {
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
   const [searchIsShowing, setSearchIsShowing] = useState(false);
+
+    const [searchLocations, setSearchLocations] = useState([]);
+  const [locations, setLocations] = useState([]);
+  const [needsUpdated, setNeedsUpdated] = useState(true);
+  const geoAPI = process.env.NEXT_PUBLIC_GEOAPI;
 
   // chart data
   const [chartDataByYear, setChartDataByYear] = useState({});
@@ -51,10 +59,21 @@ export default function Home() {
           properties: {
             title: item.name,
             type: item.recclass,
-            year: item.year,
+            year: item.year || "Unknown",
             mass: parseFloat(item.mass || 0),
+            location: "Unknown",
           },
         }));
+
+        setSearchLocations((prevSearchLocations) => [
+          ...prevSearchLocations,
+          ...mapPoints.map((item) => ({
+            params: {
+              lat: item?.geometry?.coordinates[1],
+              lon: item?.geometry?.coordinates[0],
+            },
+          })),
+        ]);
 
         setData(mapPoints);
         setFilteredData(mapPoints);
@@ -68,6 +87,114 @@ export default function Home() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const updateLocations = async () => {
+      if (needsUpdated && searchLocations.length > 0) {
+        const returned = await fetchLocationData(searchLocations, geoAPI);
+        console.log(returned);
+        setLocations(returned);
+        setNeedsUpdated(false);
+      }
+    };
+    updateLocations();
+  }, [data]);
+
+  useEffect(() => {
+    console.log("Called to check locations");
+    if (locations !== []) {
+      setData((prevData) => {
+        return prevData.map((prev, index) => {
+          // Check if the index is within the bounds of the 'locations' array
+          const locationInfo = locations.results[index];
+          try {
+            if (locationInfo.result.features[0].properties.country) {
+          console.log(locationInfo.result.features[0].properties.country);
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.country,
+                }
+              };
+              //If no location return unknown -test
+            }if(locationInfo.result.features[0].properties.ocean){ 
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.ocean,
+                }
+              };
+            }else {
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: "Unknown",
+                }
+              };
+            }
+          } catch (error) {
+            console.log(error);
+            return {
+              ...prev,
+                properties: {
+                ...prev.properties,
+                  location: "Unknown",
+                }
+            };
+          }
+        });
+      });
+      setFilteredData((prevData) => {
+        return prevData.map((prev, index) => {
+          // Check if the index is within the bounds of the 'locations' array
+          const locationInfo = locations.results[index];
+          try {
+            if (locationInfo.result.features[0].properties.country) {
+          console.log(locationInfo.result.features[0].properties.country);
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.country,
+                }
+              };
+              //If no location return unknown -test
+            }if(locationInfo.result.features[0].properties.ocean){ 
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: locationInfo.result.features[0].properties.ocean,
+                }
+              };
+            }else {
+              return {
+                ...prev,
+                properties: {
+                  ...prev.properties,
+                  location: "Unknown",
+                }
+              };
+            }
+          } catch (error) {
+            console.log(error);
+            return {
+              ...prev,
+                properties: {
+                ...prev.properties,
+                  location: "Unknown",
+                }
+            };
+          }
+        });
+      });
+    }
+  }, [locations]);
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,7 +220,8 @@ export default function Home() {
             .toLowerCase()
             .includes(filterClass.toLowerCase()) &&
           item.properties.mass >= lowMass &&
-          item.properties.mass <= highMass
+          item.properties.mass <= highMass &&
+          item.properties.location.toLowerCase().includes(filterName.toLowerCase())
         ) {
           return item;
         }
@@ -187,6 +315,7 @@ export default function Home() {
       <MeteorInfo />
       <StrikesMeteorChart dataByYear={chartDataByYear} />
       <AverageMass data={filteredData} />
+      <Modal data={filteredData} search={searchLocations} />
     </>
   );
 }
