@@ -7,11 +7,11 @@ import Head from "next/head";
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import StrikesMeteorChart from "@/components/StrikesMeteorChart";
+import MeteorInfo from "@/components/MeteorInfo";
 
-// utils 
+// utils
 import { processDataByYear } from "@/utils/processMeteorData";
 import AverageMass from "@/components/AverageMass";
-
 import Modal from "@/components/Modal";
 import fetchLocationData from "../app/helpers";
 
@@ -33,6 +33,7 @@ export default function Home() {
   const [lowMass, setLowMass] = useState(0);
   const [highMass, setHighMass] = useState(1000000);
   const [searchIsShowing, setSearchIsShowing] = useState(false);
+
     const [searchLocations, setSearchLocations] = useState([]);
   const [locations, setLocations] = useState([]);
   const [needsUpdated, setNeedsUpdated] = useState(true);
@@ -298,10 +299,22 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-        <MapBox data={filteredData} />
 
+      <p className={styles.introductionParagraph}>
+        Welcome to Fireball! Our goal is to shed light on the fascinating world
+        of meteor strikes, offering a comprehensive view of data collected by
+        NASA with over a 1000 strikes stretching back in time to the 1400s!
+        Whether you're an astronomy enthusiast, a curious student, or simply
+        intrigued by the mysteries of the universe, this platform provides an
+        interactive experience to explore and learn about meteors, their dynamic
+        sizes, impacts, and much more. Dive in and discover the cosmic wonders
+        of our planet!
+      </p>
+
+      <MapBox data={filteredData} />
+      <MeteorInfo />
       <StrikesMeteorChart dataByYear={chartDataByYear} />
-      <AverageMass data = {filteredData}/>
+      <AverageMass data={filteredData} />
       <Modal data={filteredData} search={searchLocations} />
     </>
   );
