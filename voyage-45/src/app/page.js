@@ -14,6 +14,7 @@ import { processDataByYear } from "@/utils/processMeteorData";
 import AverageMass from "@/components/AverageMass";
 import Modal from "@/components/Modal";
 import fetchLocationData from "../app/helpers";
+import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
 
 /* style imports */
 import styles from "./page.module.css";
@@ -316,6 +317,8 @@ export default function Home() {
       <StrikesMeteorChart dataByYear={chartDataByYear} />
       <AverageMass data={filteredData} />
       <Modal data={filteredData} search={searchLocations} />
+
+      <StrikesByComp data={filteredData} />
     </>
   );
 }
