@@ -110,7 +110,7 @@ export default function Home() {
           const locationInfo = locations?.results[index];
           try {
             if (locationInfo?.result?.features[0]?.properties?.country) {
-          console.log(locationInfo.result.features[0].properties.country);
+          // console.log(locationInfo.result.features[0].properties.country);
               return {
                 ...prev,
                 properties: {
@@ -154,7 +154,7 @@ export default function Home() {
           const locationInfo = locations?.results[index];
           try {
             if (locationInfo?.result?.features[0]?.properties?.country) {
-          console.log(locationInfo.result.features[0].properties.country);
+          // console.log(locationInfo.result.features[0].properties.country);
               return {
                 ...prev,
                 properties: {
