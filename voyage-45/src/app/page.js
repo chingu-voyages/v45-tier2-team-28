@@ -107,9 +107,9 @@ export default function Home() {
       setData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
-          const locationInfo = locations.results[index];
+          const locationInfo = locations?.results[index];
           try {
-            if (locationInfo.result.features[0].properties.country) {
+            if (locationInfo?.result?.features[0]?.properties?.country) {
           console.log(locationInfo.result.features[0].properties.country);
               return {
                 ...prev,
@@ -119,7 +119,7 @@ export default function Home() {
                 }
               };
               //If no location return unknown -test
-            }if(locationInfo.result.features[0].properties.ocean){ 
+            }if(locationInfo?.result?.features[0]?.properties?.ocean){ 
               return {
                 ...prev,
                 properties: {
@@ -151,9 +151,9 @@ export default function Home() {
       setFilteredData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
-          const locationInfo = locations.results[index];
+          const locationInfo = locations?.results[index];
           try {
-            if (locationInfo.result.features[0].properties.country) {
+            if (locationInfo?.result?.features[0]?.properties?.country) {
           console.log(locationInfo.result.features[0].properties.country);
               return {
                 ...prev,
@@ -163,7 +163,7 @@ export default function Home() {
                 }
               };
               //If no location return unknown -test
-            }if(locationInfo.result.features[0].properties.ocean){ 
+            }if(locationInfo?.result?.features[0]?.properties?.ocean){ 
               return {
                 ...prev,
                 properties: {
