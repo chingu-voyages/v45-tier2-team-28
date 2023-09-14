@@ -1,28 +1,49 @@
+import { Bar } from 'react-chartjs-2'
+import { CategoryScale, Chart, registerables } from 'chart.js'
+
+Chart.register(...registerables)
+Chart.register(CategoryScale)
+
 function TotalStrikes(props) {
   
-    console.log("Total strikes", props.data.length)
-        // if (mass !== undefined && mass != null){
-        //     sum += mass
-        //     count++
-        // }
+  //console.log("Total strikes", props.data.length)
 
-    // let avg = count === 0 ? 0: Math.round(sum/count)
+  const total = props.data.length
+  console.log("Total strikes", total) 
+  
+  const small = props.data.filter(num => {
+    return num != undefined && num != null && (num < 1000)
+    console.log("Small", small)
+  })
+  console.log("Small", small.length)
+  const med = props.data.filter(num => {
+    return num != undefined && num != null && (num >= 1000 && num <= 9999)
+  })
 
-    return (
-      <div>
-        <table>
-          <thead>
+  const large = props.data.filter(num => {
+    return num != undefined && num != null && (num >= 10000 && num <= 100000000)
+  })
+
+  const data = { 
+    labels: ['Small', 'Medium', 'Large'],
+  }
+
+  
+  return (
+    <div>
+      <table>
+        <thead>
+          <tr>
+            <th>Total Strikes</th>
+          </tr>
+        </thead>
+        <tbody>
             <tr>
-              <th>Total Strikes</th>
+              <Bar data={data} />
             </tr>
-          </thead>
-          <tbody>
-              <tr>
-                <td>{props.data.length}</td>
-              </tr>
-          </tbody>
-        </table>
-      </div>
+        </tbody>
+      </table>
+    </div>
     );
   }
 
