@@ -7,6 +7,7 @@ import Head from "next/head";
 import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import StrikesMeteorChart from "@/components/StrikesMeteorChart";
+import TotalStrikes from "@/components/TotalNumberStrikes";
 
 // utils 
 import { processDataByYear } from "@/utils/processMeteorData";
@@ -172,6 +173,7 @@ export default function Home() {
 
       <StrikesMeteorChart dataByYear={chartDataByYear} />
       <AverageMass data = {filteredData}/>
+      <TotalStrikes data = {filteredData} />
     </>
   );
 }
