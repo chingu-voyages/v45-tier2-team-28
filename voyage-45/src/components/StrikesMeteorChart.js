@@ -91,14 +91,16 @@ function StrikesMeteorChart({ dataByYear }) {
   };
 
   return (
-    <>
-      <button onClick={() => setIsExpanded(!isExpanded)}>
-          {isExpanded ? "Show Last 10 Years" : "Show All"}
+    <div className={isExpanded ? `${styles.chartContainer} ${styles.expanded}` : styles.chartContainer}>
+      <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
+      
+      <button 
+        onClick={() => setIsExpanded(!isExpanded)}
+        className={styles.toggleButton}
+      >
+        {isExpanded ? `Show Last ${NUM_YEARS_DISPLAYED} Years` : `Show All ${years.length} Years`}
       </button>
-      <div className={isExpanded ? `${styles.chartContainer} ${styles.expanded}` : styles.chartContainer}>
-        <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
-      </div>
-    </>
+    </div>
   );
 }
 
