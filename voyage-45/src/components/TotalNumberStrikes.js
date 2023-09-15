@@ -25,7 +25,7 @@ function TotalStrikes(props) {
   })
 
   const data = { 
-    labels: ['Small', 'Medium', 'Large'],
+    labels: ['Sma', 'Medium', 'Large'],
   }
 
   
