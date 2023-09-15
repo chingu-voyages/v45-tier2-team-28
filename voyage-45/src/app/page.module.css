@@ -12,7 +12,7 @@
 }
 
 .introductionParagraph {
-  background-color: rgba(127,198,164,0.4);
+  background-color: rgba(127,198,164,1);
   padding: 1.5rem 5rem;
   border-radius: var(--border-radius);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);

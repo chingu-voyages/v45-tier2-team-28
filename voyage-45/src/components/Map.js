@@ -21,7 +21,7 @@ function MapBox({ data }) {
             container: "map",
             style: "mapbox://styles/mapbox/navigation-night-v1",
             projection: "mercator",
-            center: [60, 25],
+            center: [0, 20],
             zoom: 1, 
             cooperativeGestures: true,
         });

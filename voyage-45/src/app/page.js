@@ -8,11 +8,13 @@ import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import StrikesMeteorChart from "@/components/StrikesMeteorChart";
 import MeteorInfo from "@/components/MeteorInfo";
+import Footer from "@/components/Footer";
+import Modal from "@/components/Modal";
 
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";
 import AverageMass from "@/components/AverageMass";
-import Modal from "@/components/Modal";
+
 import fetchLocationData from "../app/helpers";
 import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
 
@@ -313,17 +315,20 @@ export default function Home() {
         of our planet!</p>
    
       </div>
+
       <div className={styles.mainInfoContainer}>
         <Modal data={filteredData} search={searchLocations} />
         <MapBox data={filteredData} />
       </div>
 
-      <MeteorInfo />
+
       <StrikesMeteorChart dataByYear={chartDataByYear} />
       <AverageMass data={filteredData} />
 
 
       <StrikesByComp data={filteredData} />
+      <MeteorInfo />
+      <Footer/>
     </div>
   );
 }
