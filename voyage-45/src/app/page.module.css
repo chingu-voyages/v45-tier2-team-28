@@ -5,18 +5,17 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
+  background-color: #e5dada;
 }
 
 .introductionParagraph {
-  background-color: rgba(var(--callout-rgb), 0.5);
-  padding: 1.5rem;
+  background-color: rgba(127,198,164,0.4);
+  padding: 1.5rem 5rem;
   border-radius: var(--border-radius);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
-  background-color: rgba(var(--callout-rgb), 0.5);
-  margin-bottom: 2rem;
+  margin: auto;
   font-size: 1rem;
   line-height: 1.4;
-  max-width: 900px;
   width: 100%;
   text-align: center;
 }

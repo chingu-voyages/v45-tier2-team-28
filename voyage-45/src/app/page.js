@@ -301,22 +301,23 @@ export default function Home() {
         clear={clear}
       />
 
-      <p className={styles.introductionParagraph}>
-        Welcome to Fireball! Our goal is to shed light on the fascinating world
+      <div className={styles.introductionParagraph}>
+        <p>     Welcome to Fireball! Our goal is to shed light on the fascinating world
         of meteor strikes, offering a comprehensive view of data collected by
         NASA with over a 1000 strikes stretching back in time to the 1400s!
         Whether you're an astronomy enthusiast, a curious student, or simply
         intrigued by the mysteries of the universe, this platform provides an
         interactive experience to explore and learn about meteors, their dynamic
         sizes, impacts, and much more. Dive in and discover the cosmic wonders
-        of our planet!
-      </p>
-
+        of our planet!</p>
+   
+      </div>
+      <Modal data={filteredData} search={searchLocations} />
       <MapBox data={filteredData} />
       <MeteorInfo />
       <StrikesMeteorChart dataByYear={chartDataByYear} />
       <AverageMass data={filteredData} />
-      <Modal data={filteredData} search={searchLocations} />
+
 
       <StrikesByComp data={filteredData} />
     </>
