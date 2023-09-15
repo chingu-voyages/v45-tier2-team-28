@@ -1,10 +1,11 @@
 .modal {
-    height: 90vh;
-    width: 50vw;
+    height: 50vh;
+    width: 35vw;
     border: 1px solid black;
     margin-top: 20px;
     margin-left: 20px;
     overflow-y: auto;
     padding: 10px;
     transition: all 0.3s ease;
+    font-size: 15px;
 }

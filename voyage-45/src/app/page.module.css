@@ -20,6 +20,12 @@
   text-align: center;
 }
 
+.mainInfoContainer{
+  display: flex;
+  justify-content: space-evenly;
+
+}
+
 .description {
   display: inherit;
   justify-content: inherit;

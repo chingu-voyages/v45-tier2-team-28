@@ -312,8 +312,11 @@ export default function Home() {
         of our planet!</p>
    
       </div>
+      <div className={styles.mainInfoContainer}>
       <Modal data={filteredData} search={searchLocations} />
       <MapBox data={filteredData} />
+      </div>
+
       <MeteorInfo />
       <StrikesMeteorChart dataByYear={chartDataByYear} />
       <AverageMass data={filteredData} />
