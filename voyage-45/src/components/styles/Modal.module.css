@@ -2,8 +2,6 @@
     height: 50vh;
     width: 35vw;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin-top: 20px;
-    margin-left: 20px;
     overflow-y: scroll;
     overflow-x: hidden;
     transition: all 0.3s ease;
@@ -11,6 +9,8 @@
     position: relative;
     border-radius: 5px;
     background-color: white;
+    z-index: 100;
+
 }
 
 .header {
@@ -37,6 +37,7 @@
     position: relative;
     left: 40%;
     color: white;
+    text-align: center;
 }
  
 .detailTable{ 
@@ -69,4 +70,14 @@
 .tableRowDataEnd {
     padding-right: 10px;
     font-size: 14px;
+}
+
+
+.showButton {
+    width: 150px;
+    height: 25px;
+    border-radius: 10px;
+    border: none;
+    color:#D95D39;
+    background-color: #E5DADA;
 }

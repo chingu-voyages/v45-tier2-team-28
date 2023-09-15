@@ -13,7 +13,7 @@ export default function Modal(props) {
         <div className={styles.header}>
  
             <button className={styles.button} onClick={() => setOpen(false)}>X</button>
-            <h3 className={styles.tableTitle}>Details</h3>
+            <h3 className={styles.tableTitle}>Meteor Details</h3>
         </div>
 
         <div>
@@ -45,6 +45,6 @@ export default function Modal(props) {
             </table>
         </div>
     </div> : 
-    <button onClick={() => setOpen(true)}>Show Details</button>
+    <button className={styles.showButton} onClick={() => setOpen(true)}>Show Details</button>
   )
 } 
