@@ -1,11 +1,72 @@
 .modal {
     height: 50vh;
     width: 35vw;
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     margin-top: 20px;
     margin-left: 20px;
-    overflow-y: auto;
-    padding: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
     transition: all 0.3s ease;
     font-size: 15px;
+    position: relative;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.header {
+    display: flex;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: #D95D39;
+    padding: 20px;
+    text-align: center;
+}
+
+.button {
+    border: none;
+    background-color: inherit;
+    color: white;
+    position: absolute;
+    left: 25px;
+    top: 25px;
+}
+
+.tableTitle {
+    position: relative;
+    left: 40%;
+    color: white;
+}
+ 
+.detailTable{ 
+    width: 100%;
+}
+
+.tableHead {
+    /* position: relative; */
+    background-color: #E5DADA;
+    margin-bottom: 10;
+    position: sticky;
+    top: 62px;
+    
+}
+
+.tableHeadRow {
+    text-align: left;
+}
+
+.tableHeadData {
+    padding-left: 10px;
+    min-width: 60px;
+}
+
+.tableRowData {
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+.tableRowDataEnd {
+    padding-right: 10px;
+    font-size: 14px;
 }

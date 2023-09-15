@@ -278,7 +278,7 @@ export default function Home() {
   console.log(filteredData.length);
 
   return (
-    <>
+    <div className={styles.app}>
       <Head>
         <link
           href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
@@ -302,7 +302,8 @@ export default function Home() {
       />
 
       <div className={styles.introductionParagraph}>
-        <p>     Welcome to Fireball! Our goal is to shed light on the fascinating world
+        <h2>Welcome to Fireball!</h2>
+        <p>Our goal is to shed light on the fascinating world
         of meteor strikes, offering a comprehensive view of data collected by
         NASA with over a 1000 strikes stretching back in time to the 1400s!
         Whether you're an astronomy enthusiast, a curious student, or simply
@@ -313,8 +314,8 @@ export default function Home() {
    
       </div>
       <div className={styles.mainInfoContainer}>
-      <Modal data={filteredData} search={searchLocations} />
-      <MapBox data={filteredData} />
+        <Modal data={filteredData} search={searchLocations} />
+        <MapBox data={filteredData} />
       </div>
 
       <MeteorInfo />
@@ -323,6 +324,6 @@ export default function Home() {
 
 
       <StrikesByComp data={filteredData} />
-    </>
+    </div>
   );
 }

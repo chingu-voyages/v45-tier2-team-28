@@ -1,3 +1,7 @@
+.app {
+  background-color: #f7f9fc;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -5,7 +9,6 @@
   align-items: center;
   padding: 6rem;
   min-height: 100vh;
-  background-color: #e5dada;
 }
 
 .introductionParagraph {
@@ -18,12 +21,13 @@
   line-height: 1.4;
   width: 100%;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .mainInfoContainer{
   display: flex;
   justify-content: space-evenly;
-
+  width: 100vw;
 }
 
 .description {
