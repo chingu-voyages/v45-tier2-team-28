@@ -10,6 +10,7 @@ import StrikesMeteorChart from "@/components/StrikesMeteorChart";
 import MeteorInfo from "@/components/MeteorInfo";
 import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
+import TotalStrikes from "@/components/TotalNumberStrikes";
 
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";
@@ -326,6 +327,7 @@ export default function Home() {
       <h3 className={styles.chartsTitle}>Summary Graphics</h3>
       <div className={styles.charts}>
         <AverageMass data={filteredData} />
+        <TotalStrikes data ={filteredData}/>
         <StrikesMeteorChart dataByYear={chartDataByYear} />
         <StrikesByComp data={filteredData} />
       </div>
