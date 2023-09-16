@@ -21,12 +21,12 @@ function MapBox({ data }) {
             container: "map",
             style: "mapbox://styles/mapbox/navigation-night-v1",
             projection: "mercator",
-            center: [0, 20],
+            center: [-90, 25],
             zoom: 1, 
             cooperativeGestures: true,
         });
 
-        map.setRenderWorldCopies(false);
+        map.setRenderWorldCopies(true);
 
         // add navigation control (the +/- zoom buttons)
         map.addControl(new mapboxgl.NavigationControl({showCompass:false, showZoom:true}));

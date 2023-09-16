@@ -5,10 +5,9 @@ import styles from './styles/Modal.module.css'
 
 export default function Modal(props) {
   const [open, setOpen] = useState(true)
-  const [meteorList, setMeteorList] = useState([])
 
-
-  return ( open ?
+  return ( 
+    open ?
     <div className={styles.modal}>
         <div className={styles.header}>
  
@@ -32,7 +31,7 @@ export default function Modal(props) {
                         return(
                     <tr key={index}>
                         <td className={styles.tableRowData}>{meteor?.properties?.title}</td>
-                        <td className={styles.tableRowData}>{meteor?.properties?.year ? new Date (meteor.properties.year).getFullYear(): ""}</td>
+                        <td className={styles.tableRowData}>{meteor?.properties?.year && meteor?.properties?.year !== "Unknown" ? new Date (meteor.properties.year).getFullYear(): ""}</td>
                         <td className={styles.tableRowData}>{meteor?.properties?.type}</td>
                         {meteor?.properties?.mass ? 
                             (<td className={styles.tableRowData}>{Math.round(meteor?.properties?.mass)}</td>) : (<td className={styles.tableRowData}>Unknown</td>)

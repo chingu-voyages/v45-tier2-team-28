@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+
 .app {
   background-color: #f7f9fc;
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
 }
 
 .main {
@@ -17,18 +21,35 @@
   border-radius: var(--border-radius);
   border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   margin: auto;
-  font-size: 1rem;
   line-height: 1.4;
   width: 100%;
   text-align: center;
-  margin-bottom: 10px;
+  margin-top: 40px;
 }
 
 .mainInfoContainer{
   display: flex;
   justify-content: space-evenly;
   width: 100vw;
-  padding-top: 40px;
+  padding-top: 20px;
+  position: relative;
+}
+
+.chartsTitle {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 90%;
+  margin: auto;
+  column-gap: 2rem;
+  row-gap: 2rem;
+  margin-bottom: 75px;
+
 }
 
 .description {

@@ -11,7 +11,10 @@ function FilterBar(props) {
         className={styles.form}
         id="filter-bar-form"
       >
-        <input onChange={props.updateName} placeholder="Name" type="text" value={props.name} />
+        <div>        
+          <label for= "name">Name</label>
+        <input onChange={props.updateName}type="text" id= "name" value={props.name} />
+        </div>
         <div>
           <label for="year-strike">Year</label>
           <input onChange={props.updateYear} type="number" min={1000} max={3000} id="year-strike" value={props.year} />
@@ -24,15 +27,15 @@ function FilterBar(props) {
           <label for="mass-range">Mass Range</label>
           <div className={styles.checkbox}>
             <span>Small</span>
-            <input onChange={props.updateSelected} name="small" checked={props.mass.small} type="radio" value="0-10"/>
+            <input onChange={props.updateSelected} name="small" checked={props.mass.small} type="radio" value="0-999"/>
           </div>
           <div className={styles.checkbox}>
-            <span>Mid</span>
-            <input onChange={props.updateSelected} name="mid" checked={props.mass.mid} type="radio" value="11-2000"/>
+            <span>Medium</span>
+            <input onChange={props.updateSelected} name="mid" checked={props.mass.mid} type="radio" value="1000-9999"/>
           </div>
           <div className={styles.checkbox}>
             <span>Large</span>
-            <input onChange={props.updateSelected} name="large" checked={props.mass.large} type="radio" value="2001-100000000"/>
+            <input onChange={props.updateSelected} name="large" checked={props.mass.large} type="radio" value="10000-100000000"/>
           </div>
         </div>
         <button type="submit" className={styles.button}>

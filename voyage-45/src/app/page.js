@@ -320,14 +320,14 @@ export default function Home() {
         <Modal data={filteredData} search={searchLocations} />
         <MapBox data={filteredData} />
       </div>
-
-
-      <StrikesMeteorChart dataByYear={chartDataByYear} />
-      <AverageMass data={filteredData} />
-
-
-      <StrikesByComp data={filteredData} />
       <MeteorInfo />
+      <h3 className={styles.chartsTitle}>Summary Graphics</h3>
+      <div className={styles.charts}>
+        <AverageMass data={filteredData} />
+        <StrikesMeteorChart dataByYear={chartDataByYear} />
+        <StrikesByComp data={filteredData} />
+      </div>
+
       <Footer/>
     </div>
   );

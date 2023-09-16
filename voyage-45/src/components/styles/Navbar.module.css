@@ -3,15 +3,19 @@
     color: #E5DADA;
     padding: 1rem;
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
     flex-direction: column;
+    position: fixed;
+    top: 0%;
+    width: 100%;
+    z-index: 100;
 }
 
 .navItem {
     color: #f1f1f4;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    /* padding: 0.5rem 1rem; */
     transition: background 0.3s;
 }
 
@@ -19,8 +23,32 @@
     background-color: #3D3A4B;
 }
 
-.toggleBtn {
+.search {
+    display: flex;
     position: absolute;
-    left: 10%;
-    top: 3%;
+    left: 90%;
 }
+
+.closeBtn {
+    border: none;
+    color: white;
+    background-color: #2D3142;
+    font: inherit;
+    font-weight: bold;
+    transform: translateX(500%);
+}
+
+.openBtn {
+    border: none;
+    color: white;
+    background-color: #2D3142;
+    font: inherit;
+}
+
+.searchIcon {
+    height: 15px;
+    width: 15px;
+    margin: 0 5px;
+    transform: translateY(3px);
+}
+

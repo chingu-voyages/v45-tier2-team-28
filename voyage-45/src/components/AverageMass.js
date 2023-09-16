@@ -26,17 +26,17 @@ function AverageMass(props) {
   }
   let smallList = props.data.filter((meteor) => {
     const mass = meteor.properties.mass
-    return mass!== undefined && mass != null && mass < 10
+    return mass!== undefined && mass != null && mass < 1000
   })
 
   let medList = props.data.filter((meteor) => {
     const mass = meteor.properties.mass
-    return mass!== undefined && mass != null && (mass < 2000 && 11 <= mass)
+    return mass!== undefined && mass != null && (mass < 10000 && 1000 <= mass)
   })
 
   let largeList = props.data.filter((meteor) => {
     const mass = meteor.properties.mass
-    return mass!== undefined && mass != null && (mass > 2000)
+    return mass!== undefined && mass != null && (mass >= 10000)
   })  
 
   let smallAvg = calculateAvg(smallList)
