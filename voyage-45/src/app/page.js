@@ -275,6 +275,7 @@ export default function Home() {
   const toggleSearchBar = (e) => {
     e.preventDefault();
     setSearchIsShowing(!searchIsShowing);
+    
   };
 
   console.log(filteredData.length);
@@ -287,7 +288,7 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-
+    <div className={styles.header}>
       <Navbar
         toggleSearchBar={toggleSearchBar}
         searchIsShowing={searchIsShowing}
@@ -314,6 +315,7 @@ export default function Home() {
         sizes, impacts, and much more. Dive in and discover the cosmic wonders
         of our planet!</p>
    
+      </div>
       </div>
 
       <div className={styles.mainInfoContainer}>
