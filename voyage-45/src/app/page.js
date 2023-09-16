@@ -8,11 +8,13 @@ import MapBox from "@/components/Map";
 import Navbar from "@/components/Navbar";
 import StrikesMeteorChart from "@/components/StrikesMeteorChart";
 import MeteorInfo from "@/components/MeteorInfo";
+import Footer from "@/components/Footer";
+import Modal from "@/components/Modal";
 
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";
 import AverageMass from "@/components/AverageMass";
-import Modal from "@/components/Modal";
+
 import fetchLocationData from "../app/helpers";
 import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
 
@@ -273,19 +275,20 @@ export default function Home() {
   const toggleSearchBar = (e) => {
     e.preventDefault();
     setSearchIsShowing(!searchIsShowing);
+    
   };
 
   console.log(filteredData.length);
 
   return (
-    <>
+    <div className={styles.app}>
       <Head>
         <link
           href="https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css"
           rel="stylesheet"
         />
       </Head>
-
+    <div className={styles.header}>
       <Navbar
         toggleSearchBar={toggleSearchBar}
         searchIsShowing={searchIsShowing}
@@ -301,24 +304,33 @@ export default function Home() {
         clear={clear}
       />
 
-      <p className={styles.introductionParagraph}>
-        Welcome to Fireball! Our goal is to shed light on the fascinating world
+      <div className={styles.introductionParagraph}>
+        <h2>Welcome to Fireball!</h2>
+        <p>Our goal is to shed light on the fascinating world
         of meteor strikes, offering a comprehensive view of data collected by
         NASA with over a 1000 strikes stretching back in time to the 1400s!
         Whether you're an astronomy enthusiast, a curious student, or simply
         intrigued by the mysteries of the universe, this platform provides an
         interactive experience to explore and learn about meteors, their dynamic
         sizes, impacts, and much more. Dive in and discover the cosmic wonders
-        of our planet!
-      </p>
+        of our planet!</p>
+   
+      </div>
+      </div>
 
-      <MapBox data={filteredData} />
+      <div className={styles.mainInfoContainer}>
+        <Modal data={filteredData} search={searchLocations} />
+        <MapBox data={filteredData} />
+      </div>
       <MeteorInfo />
-      <StrikesMeteorChart dataByYear={chartDataByYear} />
-      <AverageMass data={filteredData} />
-      <Modal data={filteredData} search={searchLocations} />
+      <h3 className={styles.chartsTitle}>Summary Graphics</h3>
+      <div className={styles.charts}>
+        <AverageMass data={filteredData} />
+        <StrikesMeteorChart dataByYear={chartDataByYear} />
+        <StrikesByComp data={filteredData} />
+      </div>
 
-      <StrikesByComp data={filteredData} />
-    </>
+      <Footer/>
+    </div>
   );
 }

@@ -11,7 +11,10 @@ function FilterBar(props) {
         className={styles.form}
         id="filter-bar-form"
       >
-        <input onChange={props.updateName} placeholder="Name" type="text" value={props.name} />
+        <div>        
+          <label for= "name">Name</label>
+        <input onChange={props.updateName}type="text" id= "name" value={props.name} />
+        </div>
         <div>
           <label for="year-strike">Year</label>
           <input onChange={props.updateYear} type="number" min={1000} max={3000} id="year-strike" value={props.year} />
@@ -27,7 +30,7 @@ function FilterBar(props) {
             <input onChange={props.updateSelected} name="small" checked={props.mass.small} type="radio" value="0-999"/>
           </div>
           <div className={styles.checkbox}>
-            <span>Mid</span>
+            <span>Medium</span>
             <input onChange={props.updateSelected} name="mid" checked={props.mass.mid} type="radio" value="1000-9999"/>
           </div>
           <div className={styles.checkbox}>

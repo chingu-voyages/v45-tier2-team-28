@@ -1,6 +1,5 @@
 .chartContainer {
-    width: 1000px;
-    height: 500px;
+    width: 100%;
     margin: 0 auto;
     overflow-x: scroll;
     white-space: nowrap;

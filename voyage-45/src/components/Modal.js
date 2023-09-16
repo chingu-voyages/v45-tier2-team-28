@@ -5,35 +5,38 @@ import styles from './styles/Modal.module.css'
 
 export default function Modal(props) {
   const [open, setOpen] = useState(true)
-  const [meteorList, setMeteorList] = useState([])
 
-
-  return ( open ?
+  return ( 
+    open ?
     <div className={styles.modal}>
-        <button onClick={() => setOpen(false)}>X</button>
-        <h2>Details</h2>
+        <div className={styles.header}>
+ 
+            <button className={styles.button} onClick={() => setOpen(false)}>X</button>
+            <h3 className={styles.tableTitle}>Meteor Details</h3>
+        </div>
+
         <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Year of Strike</th>
-                        <th>Meteorite Composition</th>
-                        <th>Mass Range</th>
-                        <th>Location</th>
+            <table className={styles.detailTable}>
+                <thead className={styles.tableHead}> 
+                    <tr className={styles.tableHeadRow}>
+                        <th className={styles.tableHeadData}>Name</th>
+                        <th className={styles.tableHeadData}>Year</th>
+                        <th className={styles.tableHeadData}>Composition</th>
+                        <th className={styles.tableHeadData}>Mass (g)</th>
+                        <th className={styles.tableHeadDataEnd}>Location</th>
                     </tr>
                 </thead>
                 <tbody>
                     {props.data.map((meteor, index) => {
                         return(
                     <tr key={index}>
-                        <td>{meteor?.properties?.title}</td>
-                        <td>{meteor?.properties?.year ? new Date (meteor.properties.year).getFullYear(): ""}</td>
-                        <td>{meteor?.properties?.type}</td>
+                        <td className={styles.tableRowData}>{meteor?.properties?.title}</td>
+                        <td className={styles.tableRowData}>{meteor?.properties?.year && meteor?.properties?.year !== "Unknown" ? new Date (meteor.properties.year).getFullYear(): ""}</td>
+                        <td className={styles.tableRowData}>{meteor?.properties?.type}</td>
                         {meteor?.properties?.mass ? 
-                            (<td>{Math.round(meteor?.properties?.mass)}</td>) : (<td>Unknown</td>)
+                            (<td className={styles.tableRowData}>{Math.round(meteor?.properties?.mass)}</td>) : (<td className={styles.tableRowData}>Unknown</td>)
                         }
-                        <td>{meteor?.properties?.location}</td>
+                        <td className={styles.tableRowDataEnd}>{meteor?.properties?.location}</td>
                     </tr>)
                     })}
 
@@ -41,6 +44,6 @@ export default function Modal(props) {
             </table>
         </div>
     </div> : 
-    <button onClick={() => setOpen(true)}>Show Details</button>
+    <button className={styles.showButton} onClick={() => setOpen(true)}>Show Details</button>
   )
 } 
