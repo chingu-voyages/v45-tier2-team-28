@@ -11,13 +11,15 @@ import MeteorInfo from "@/components/MeteorInfo";
 import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
 import TotalStrikes from "@/components/TotalNumberStrikes";
+import AverageMass from "@/components/AverageMass";
+import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
 
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";
-import AverageMass from "@/components/AverageMass";
+
 
 import fetchLocationData from "../app/helpers";
-import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
+
 
 /* style imports */
 import styles from "./page.module.css";
@@ -96,7 +98,7 @@ export default function Home() {
     const updateLocations = async () => {
       if (needsUpdated && searchLocations.length > 0) {
         const returned = await fetchLocationData(searchLocations, geoAPI);
-        console.log(returned);
+        console.log("RETURNED",returned);
         setLocations(returned);
         setNeedsUpdated(false);
       }
@@ -106,7 +108,7 @@ export default function Home() {
 
   useEffect(() => {
     console.log("Called to check locations");
-    if (locations !== []) {
+    if (locations !== undefined) {
       setData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
@@ -151,6 +153,9 @@ export default function Home() {
           }
         });
       });
+
+      console.log(data)
+
       setFilteredData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
@@ -195,6 +200,7 @@ export default function Home() {
           }
         });
       });
+
     }
   }, [locations]);
 
