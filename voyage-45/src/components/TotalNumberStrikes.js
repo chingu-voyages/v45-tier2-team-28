@@ -28,7 +28,9 @@ function TotalStrikes(props) {
     datasets: [{
       label: 'Total Strikes',
       data: [smallNum, medNum, largeNum ,total],
-      borderWidth: 1
+      borderWidth: 1,
+      backgroundColor: '#43A5B0',
+      borderColor: '#43A5B0',
     }]
   }
 
@@ -42,8 +44,8 @@ function TotalStrikes(props) {
   
   return (
     <div className='totalstrikes--chart'>
-      <h3 style={{textAlign:'center', backgroundColor:'blue', padding:'10px 0', color: 'white'}}>Total Strikes</h3>
-      <Bar data={data} options={options}/>
+      <h3 style={{textAlign:'center', backgroundColor:'#F3EA98', padding:'10px 0', color: 'black'}}>Total Strikes</h3>
+      <Bar data={data} options={options} style ={{backgroundColor:'rgb(247, 249, 252)'}}/>
     </div>
     );
   }

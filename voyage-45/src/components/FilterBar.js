@@ -12,19 +12,19 @@ function FilterBar(props) {
         id="filter-bar-form"
       >
         <div>        
-          <label for= "name">Name</label>
+          <label htmlFor= "name">Name</label>
         <input onChange={props.updateName}type="text" id= "name" value={props.name} />
         </div>
         <div>
-          <label for="year-strike">Year</label>
+          <label htmlFor="year-strike">Year</label>
           <input onChange={props.updateYear} type="number" min={1000} max={3000} id="year-strike" value={props.year} />
         </div>
         <div>
-          <label for="class-type">Class</label>
+          <label htmlFor="class-type">Class</label>
           <input onChange={props.updateType} typ="text" id="class-type" value={props.type} />
         </div>
         <div className={styles.range}>
-          <label for="mass-range">Mass Range</label>
+          <label htmlFor="mass-range">Mass Range</label>
           <div className={styles.checkbox}>
             <span>Small</span>
             <input onChange={props.updateSelected} name="small" checked={props.mass.small} type="radio" value="0-999"/>

@@ -21,7 +21,7 @@
     top: 0;
     width: 100%;
     z-index: 100;
-    background-color: #D95D39;
+    background-color: #F3EA98;
     padding: 20px;
     text-align: center;
 }
@@ -29,7 +29,7 @@
 .button {
     border: none;
     background-color: inherit;
-    color: white;
+    color: black;
     position: absolute;
     left: 25px;
     top: 25px;
@@ -38,7 +38,7 @@
 .tableTitle {
     position: relative;
     left: 40%;
-    color: white;
+    color: black;
     text-align: center;
 }
  
@@ -79,7 +79,7 @@
     width: 150px;
     border-radius: 10px;
     border: none;
-    color:#D95D39;
+    color:#2d3142;
     background-color: #E5DADA;
     position: absolute;
     left: 6%;
@@ -89,4 +89,8 @@
     font-weight: bold;
     padding: 8px 0;
     font-family: inherit;
+}
+
+.showButton:hover{
+    background-color: #f4eeee;
 }

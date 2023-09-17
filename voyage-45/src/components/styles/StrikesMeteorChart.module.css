@@ -1,7 +1,8 @@
 .chartContainer {
     position: relative;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     white-space: nowrap;
+    padding-bottom: 0;
 }
 
 .chartWrapper {
@@ -13,9 +14,9 @@
     position: absolute;
     top: 47px;
     right: 10px;
-    background-color: #2D3142;
+    background-color: #e5dada;
     margin: 0;
-    color: #FFFFFF;
+    color: #2d3142;
     border: none;
     padding: 10px 20px;
     border-radius: 4px;
@@ -27,5 +28,5 @@
 }
 
 .toggleButton:hover {
-    background-color: #1A1D2B;
+    background-color: #f4eeee;
 }

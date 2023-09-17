@@ -304,7 +304,7 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-
+  <div className={styles.intro}>
       <div className={styles.introductionParagraph}>
         <h2>Welcome to Fireball!</h2>
         <p>Our goal is to shed light on the fascinating world
@@ -315,7 +315,7 @@ export default function Home() {
         interactive experience to explore and learn about meteors, their dynamic
         sizes, impacts, and much more. Dive in and discover the cosmic wonders
         of our planet!</p>
-   
+        </div>
       </div>
       </div>
 
@@ -330,9 +330,7 @@ export default function Home() {
         <AverageMass className= {styles.chart} data={filteredData} />
         <StrikesByComp className= {styles.chart} data={filteredData} />
         <StrikesMeteorChart className= {styles.chart} dataByYear={chartDataByYear} />
-
       </div>
-
       <Footer/>
     </div>
   );

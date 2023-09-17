@@ -22,22 +22,23 @@ function StrikesMeteorChart({ dataByYear }) {
       {
         label: 'Small',
         data: visibleYears.map(year => dataByYear[year].small),
-        backgroundColor: '#BFACAA',
-        borderColor: '#8E7C77',
+
+        backgroundColor: '#BEE2F7',
+        borderColor: '#BEE2F7',
         borderWidth: 1
       },
       {
         label: 'Medium',
         data: visibleYears.map(year => dataByYear[year].medium),
-        backgroundColor: '#05204A',
-        borderColor: '#041430',
+        backgroundColor: '#43A5B0',
+        borderColor: '#43A5B0',
         borderWidth: 1
       },
       {
         label: 'Large',
         data: visibleYears.map(year => dataByYear[year].large),
-        backgroundColor: '#B497D6',
-        borderColor: '#9C75C2',
+        backgroundColor: '#2D3142',
+        borderColor: '#2D3142',
         borderWidth: 1
       },
     ],
@@ -84,8 +85,8 @@ function StrikesMeteorChart({ dataByYear }) {
 
   return (
     <div className={isExpanded ? `${styles.chartContainer} ${styles.expanded}` : styles.chartContainer}>
-      <h3 style={{textAlign:'center', backgroundColor:'blue', padding:'10px 0', color: 'white', marginBottom:'15px'}}>Average Mass</h3>
-      <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
+      <h3 style={{textAlign:'center', backgroundColor:'#F3EA98', padding:'10px 0', color: 'black'}}>Strikes by Year</h3>
+      <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} style={{backgroundColor:'rgb(247, 249, 252)'}} />
       
       <button 
         onClick={() => setIsExpanded(!isExpanded)}

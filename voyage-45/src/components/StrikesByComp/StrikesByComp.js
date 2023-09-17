@@ -15,17 +15,14 @@ function StrikesByComp(props) {
       return { name: type, count: count };
     });
 
-    // Generate an array of colors with varying red values
-    const backgroundColors = labels.map((_, index) => `rgba(${255 - index * 5}, 56, 0, 0.5)`);
-
     const data = {
       labels: labels, // Use "labels" for the label property
       datasets: [
         {
           label: 'Strikes by Composition',
           data: typeCounts.map((item) => item.count),
-          backgroundColor: backgroundColors,
-          borderColor: '#8E7C77',
+          backgroundColor: '#2D3142',
+          borderColor: '#2D3142',
           borderWidth: 3,
           pointStyle: 'rect',
           hoverOffset: 15,
@@ -75,8 +72,8 @@ function StrikesByComp(props) {
   return (
     <div>
       {/* Use the chartRef for the canvas element */}
-      <h3 style={{textAlign:'center', backgroundColor:'blue', padding:'10px 0', color: 'white'}}>Strikes by Composition</h3>
-      <canvas id="strikeChart" ref={chartRef}></canvas>
+      <h3 style={{textAlign:'center', backgroundColor:'#F3EA98', padding:'10px 0', color: 'black'}}>Strikes by Composition</h3>
+      <canvas id="strikeChart" ref={chartRef} style={{backgroundColor:'rgb(247, 249, 252)'}}></canvas>
     </div>
   );
 }
