@@ -84,6 +84,7 @@ function StrikesMeteorChart({ dataByYear }) {
 
   return (
     <div className={isExpanded ? `${styles.chartContainer} ${styles.expanded}` : styles.chartContainer}>
+      <h3 style={{textAlign:'center', backgroundColor:'blue', padding:'10px 0', color: 'white', marginBottom:'15px'}}>Average Mass</h3>
       <Bar data={chartData} options={options} responsive={true} maintainAspectRatio={false} />
       
       <button 

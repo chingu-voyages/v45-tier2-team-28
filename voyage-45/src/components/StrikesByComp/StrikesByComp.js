@@ -33,6 +33,8 @@ function StrikesByComp(props) {
       ],
     };
 
+
+
     // Check if the chartRef is available before creating the chart
     if (chartRef.current) {
       const ctx = chartRef.current.getContext('2d');
@@ -52,6 +54,11 @@ function StrikesByComp(props) {
               beginAtZero: true,
             },
           },
+          plugins: {
+            legend: {
+              display: false
+            }
+          }
         },
       });
 
@@ -62,9 +69,13 @@ function StrikesByComp(props) {
     }
   }, [props.data]); // Run this effect whenever props.data changes
 
+
+
+
   return (
     <div>
       {/* Use the chartRef for the canvas element */}
+      <h3 style={{textAlign:'center', backgroundColor:'blue', padding:'10px 0', color: 'white'}}>Strikes by Composition</h3>
       <canvas id="strikeChart" ref={chartRef}></canvas>
     </div>
   );

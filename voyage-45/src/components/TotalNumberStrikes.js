@@ -32,10 +32,18 @@ function TotalStrikes(props) {
     }]
   }
 
+  const options = {
+    plugins: {
+      legend: {
+        display: false,
+      }
+    }
+  }
   
   return (
     <div className='totalstrikes--chart'>
-      <Bar data={data} />
+      <h3 style={{textAlign:'center', backgroundColor:'blue', padding:'10px 0', color: 'white'}}>Total Strikes</h3>
+      <Bar data={data} options={options}/>
     </div>
     );
   }
