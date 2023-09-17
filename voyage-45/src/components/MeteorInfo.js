@@ -33,14 +33,13 @@ function MeteorInfo() {
 
       <h4 className={styles.meteorInfoSubHeader}>Size Classifications:</h4>
       <p className={styles.meteorInfoParagraph}>
-        <span className={styles.meteorInfoStrong}>Small:</span> Less than 10
-        grams
+        <span className={styles.meteorInfoStrong}>Small:</span> Less than 1 kilogram
+        
         <br />
-        <span className={styles.meteorInfoStrong}>Medium:</span> Between 10
-        grams to 2 kilograms
+        <span className={styles.meteorInfoStrong}>Medium:</span> Between 1
+        kilogram and 10 kilograms
         <br />
-        <span className={styles.meteorInfoStrong}>Large:</span> More than 2
-        kilograms
+        <span className={styles.meteorInfoStrong}>Large:</span> 10 kilograms and more
       </p>
 
       <h4 className={styles.meteorInfoSubHeader}>
@@ -53,13 +52,13 @@ function MeteorInfo() {
       <p className={styles.meteorInfoParagraph}>
         <span className={styles.meteorInfoStrong}>1 kg:</span> Your laptop
         <br />
-        <span className={styles.meteorInfoStrong}>10 kg:</span> Bag of dogfood
+        <span className={styles.meteorInfoStrong}>10 kg:</span> Bag of dog food
         <br />
-        <span className={styles.meteorInfoStrong}>50 kg:</span> 60" flatscreen
+        <span className={styles.meteorInfoStrong}>50 kg:</span> 60" flat-screen
         TV
         <br />
         <span className={styles.meteorInfoStrong}>100 kg:</span> Standard
-        regrigerator
+        refrigerator
         <br />
         <span className={styles.meteorInfoStrong}>500 kg:</span> Concert grand
         piano

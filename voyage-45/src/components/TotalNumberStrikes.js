@@ -6,11 +6,8 @@ Chart.register(CategoryScale)
 
 function TotalStrikes(props) {
   
-  //console.log("Total strikes", props.data.length)
-
   const total = props.data.length
-  console.log("Total strikes", total) 
-  
+
   const smallNum = props.data.filter(num => {
     const small = num.properties.mass
     return small !== undefined && small != null && small < 1000
@@ -27,10 +24,10 @@ function TotalStrikes(props) {
   }).length;
 
   const data = { 
-    labels: ['Small', 'Medium', 'Large'],
+    labels: ['Small', 'Medium', 'Large', 'Total'],
     datasets: [{
       label: 'Total Strikes',
-      data: [smallNum, medNum, largeNum],
+      data: [smallNum, medNum, largeNum ,total],
       borderWidth: 1
     }]
   }

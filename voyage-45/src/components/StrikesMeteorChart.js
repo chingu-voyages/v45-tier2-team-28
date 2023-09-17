@@ -68,14 +68,6 @@ function StrikesMeteorChart({ dataByYear }) {
       }
     },
     plugins: {
-      title: {
-        display: true,
-        text: 'Meteor Strikes per Year',
-        font: {
-          size: 20
-        },
-        padding: 10
-      },
       legend: {
         display: true,
         position: 'top'

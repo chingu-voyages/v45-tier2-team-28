@@ -324,15 +324,17 @@ export default function Home() {
         <MapBox data={filteredData} />
       </div>
       <MeteorInfo />
-      <h3 className={styles.chartsTitle}>Summary Graphics</h3>
+      <h2 className={styles.chartsTitle}>Summary Graphics</h2>
       <div className={styles.charts}>
-        <AverageMass data={filteredData} />
-        <TotalStrikes data ={filteredData}/>
-        <StrikesMeteorChart dataByYear={chartDataByYear} />
-        <StrikesByComp data={filteredData} />
+        <TotalStrikes className= {styles.chart} data ={filteredData}/>  
+        <AverageMass className= {styles.chart} data={filteredData} />
+        <StrikesByComp className= {styles.chart} data={filteredData} />
+        <StrikesMeteorChart className= {styles.chart} dataByYear={chartDataByYear} />
+
       </div>
 
       <Footer/>
     </div>
   );
+
 }

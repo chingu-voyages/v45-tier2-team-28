@@ -65,7 +65,7 @@ function StrikesByComp(props) {
   return (
     <div>
       {/* Use the chartRef for the canvas element */}
-      <canvas id="strikeChart" ref={chartRef} style={{ maxWidth: 550, maxHeight: 550 }}></canvas>
+      <canvas id="strikeChart" ref={chartRef}></canvas>
     </div>
   );
 }

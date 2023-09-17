@@ -88,4 +88,5 @@
     font-size: medium;
     font-weight: bold;
     padding: 8px 0;
+    font-family: inherit;
 }
