@@ -8,7 +8,7 @@ The group is comprised of: Shannan Bunch (https://github.com/funbunch), Mason Sa
 
 <img width="1828" alt="Screen Shot 2023-09-17 at 10 18 14 AM" src="https://github.com/chingu-voyages/v45-tier2-team-28/assets/78603508/ba4c8902-f0ef-4d08-97d9-dff88f18abd2">
 
-## Table of Contentsd
+## Table of Contents
 - [Live Code](#live-code)
 - [Features](#features)
 - [Installation and Setup](#installation-and-setup)
@@ -45,10 +45,3 @@ https://fireball-map.netlify.app/
 - Data source: Nasa API - https://data.nasa.gov/Earth-Science/Meteorite-Landings-API/c2vx-j9ed
 - Chart library: [react-chartjs-2](https://react-chartjs-2.js.org/)
 - Map Library: [map-boxgl] (https://docs.mapbox.com/mapbox-gl-js/api/map/)
-
-Meeting Agenda templates (located in the `/docs` directory in this repo):
-
-- Meeting - Voyage Kickoff --> ./docs/meeting-voyage_kickoff.docx
-- Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
-- Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
-- Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
