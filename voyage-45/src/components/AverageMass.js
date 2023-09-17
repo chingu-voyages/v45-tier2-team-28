@@ -1,9 +1,11 @@
 import { Bar } from 'react-chartjs-2'
 import { CategoryScale, Chart, registerables } from 'chart.js'
 
+
 Chart.register(...registerables)
 Chart.register(CategoryScale)
 
+Chart.defaults.font.family = 'Lato'
 
 
 function AverageMass(props) {
@@ -49,22 +51,24 @@ function AverageMass(props) {
     datasets: [{
       label: 'Average Mass',
       data: [smallAvg, medAvg, largeAvg, totalAvg],
-      borderWidth: 1
+      borderWidth: 1,
+      backgroundColor: '#BEE2F7',
+      borderColor: '#BEE2F7'
     }]
   }
 
   const options = {
     plugins: {
-      title: {
-        display: true,
-        text: 'Average Mass'
+      legend: {
+        display: false,
       }
     }
   }
 
     return (
       <div>
-        <Bar data={data} options={options} />
+        <h3 style={{textAlign:'center', backgroundColor:'#F3EA98', padding:'10px 0', color: 'black'}}>Average Mass (g)</h3>
+        <Bar options={options} data={data} style={{backgroundColor:'rgb(247, 249, 252)'}}/>
       </div>
     );
   }

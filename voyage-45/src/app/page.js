@@ -11,13 +11,15 @@ import MeteorInfo from "@/components/MeteorInfo";
 import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
 import TotalStrikes from "@/components/TotalNumberStrikes";
+import AverageMass from "@/components/AverageMass";
+import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
 
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";
-import AverageMass from "@/components/AverageMass";
+
 
 import fetchLocationData from "../app/helpers";
-import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
+
 
 /* style imports */
 import styles from "./page.module.css";
@@ -96,7 +98,7 @@ export default function Home() {
     const updateLocations = async () => {
       if (needsUpdated && searchLocations.length > 0) {
         const returned = await fetchLocationData(searchLocations, geoAPI);
-        console.log(returned);
+        console.log("RETURNED",returned);
         setLocations(returned);
         setNeedsUpdated(false);
       }
@@ -106,7 +108,7 @@ export default function Home() {
 
   useEffect(() => {
     console.log("Called to check locations");
-    if (locations !== []) {
+    if (locations !== undefined) {
       setData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
@@ -151,6 +153,9 @@ export default function Home() {
           }
         });
       });
+
+      console.log(data)
+
       setFilteredData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
@@ -195,6 +200,7 @@ export default function Home() {
           }
         });
       });
+
     }
   }, [locations]);
 
@@ -304,7 +310,7 @@ export default function Home() {
         type={filterClass}
         clear={clear}
       />
-
+  <div className={styles.intro}>
       <div className={styles.introductionParagraph}>
         <h2>Welcome to Fireball!</h2>
         <p>Our goal is to shed light on the fascinating world
@@ -315,7 +321,7 @@ export default function Home() {
         interactive experience to explore and learn about meteors, their dynamic
         sizes, impacts, and much more. Dive in and discover the cosmic wonders
         of our planet!</p>
-   
+        </div>
       </div>
       </div>
 
@@ -324,15 +330,15 @@ export default function Home() {
         <MapBox data={filteredData} />
       </div>
       <MeteorInfo />
-      <h3 className={styles.chartsTitle}>Summary Graphics</h3>
+      <h2 className={styles.chartsTitle}>Summary Graphics</h2>
       <div className={styles.charts}>
-        <AverageMass data={filteredData} />
-        <TotalStrikes data ={filteredData}/>
-        <StrikesMeteorChart dataByYear={chartDataByYear} />
-        <StrikesByComp data={filteredData} />
+        <TotalStrikes className= {styles.chart} data ={filteredData}/>  
+        <AverageMass className= {styles.chart} data={filteredData} />
+        <StrikesByComp className= {styles.chart} data={filteredData} />
+        <StrikesMeteorChart className= {styles.chart} dataByYear={chartDataByYear} />
       </div>
-
       <Footer/>
     </div>
   );
+
 }
