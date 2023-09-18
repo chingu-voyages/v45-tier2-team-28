@@ -98,7 +98,6 @@ export default function Home() {
     const updateLocations = async () => {
       if (needsUpdated && searchLocations.length > 0) {
         const returned = await fetchLocationData(searchLocations, geoAPI);
-        console.log("RETURNED",returned);
         setLocations(returned);
         setNeedsUpdated(false);
       }
@@ -107,7 +106,6 @@ export default function Home() {
   }, [data]);
 
   useEffect(() => {
-    console.log("Called to check locations");
     if (locations !== undefined) {
       setData((prevData) => {
         return prevData.map((prev, index) => {
@@ -115,7 +113,6 @@ export default function Home() {
           const locationInfo = locations?.results[index];
           try {
             if (locationInfo?.result?.features[0]?.properties?.country) {
-          // console.log(locationInfo.result.features[0].properties.country);
               return {
                 ...prev,
                 properties: {
@@ -142,7 +139,6 @@ export default function Home() {
               };
             }
           } catch (error) {
-            console.log(error);
             return {
               ...prev,
                 properties: {
@@ -154,15 +150,12 @@ export default function Home() {
         });
       });
 
-      console.log(data)
-
       setFilteredData((prevData) => {
         return prevData.map((prev, index) => {
           // Check if the index is within the bounds of the 'locations' array
           const locationInfo = locations?.results[index];
           try {
             if (locationInfo?.result?.features[0]?.properties?.country) {
-          // console.log(locationInfo.result.features[0].properties.country);
               return {
                 ...prev,
                 properties: {
@@ -189,7 +182,6 @@ export default function Home() {
               };
             }
           } catch (error) {
-            console.log(error);
             return {
               ...prev,
                 properties: {
@@ -285,7 +277,6 @@ export default function Home() {
     
   };
 
-  console.log(filteredData.length);
 
   return (
     <div className={styles.app}>

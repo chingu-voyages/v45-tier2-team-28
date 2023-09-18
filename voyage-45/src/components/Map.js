@@ -31,10 +31,6 @@ function MapBox({ data }) {
         // add navigation control (the +/- zoom buttons)
         map.addControl(new mapboxgl.NavigationControl({showCompass:false, showZoom:true}));
 
-
-    console.log("Map receieves: ");
-    console.log(data);
-
     map.on("load", () => {
       // Add data to the map as a source
       map.addSource("points", {
