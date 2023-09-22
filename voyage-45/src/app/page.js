@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import Modal from "@/components/Modal";
 import TotalStrikes from "@/components/TotalNumberStrikes";
 import AverageMass from "@/components/AverageMass";
-import StrikesByComp from "../components/StrikesByComp/StrikesByComp";
+import StrikesByComp from "@/components/StrikesByComp";
 
 // utils
 import { processDataByYear } from "@/utils/processMeteorData";

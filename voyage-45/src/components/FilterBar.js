@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
-import styles from "./Filterbar.module.css";
+import styles from "./styles/Filterbar.module.css";
 
 function FilterBar(props) {
   const imgUrl = "https://img.icons8.com/?size=512&id=20006&format=png";
@@ -12,7 +12,7 @@ function FilterBar(props) {
         id="filter-bar-form"
       >
         <div>        
-          <label htmlFor= "name">Name</label>
+          <label htmlFor="name">Name</label>
         <input onChange={props.updateName}type="text" id= "name" value={props.name} />
         </div>
         <div>

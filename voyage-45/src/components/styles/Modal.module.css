@@ -41,13 +41,12 @@
     color: black;
     text-align: center;
 }
- 
+
 .detailTable{ 
     width: 100%;
 }
 
 .tableHead {
-    /* position: relative; */
     background-color: #E5DADA;
     margin-bottom: 10;
     position: sticky;
@@ -93,4 +92,12 @@
 
 .showButton:hover{
     background-color: #f4eeee;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+    .modal {
+        width: 88%;
+    }
 }

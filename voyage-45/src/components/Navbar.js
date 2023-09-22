@@ -10,18 +10,16 @@ import { AiOutlineClose } from "react-icons/ai";
 function Navbar(props) {
   return (
     <nav className={styles.navbar}>
-      <div className={styles.search} onClick={props.toggleSearchBar}>
-        {props.searchIsShowing ?  <div> 
-        <button className={styles.closeBtn} > <AiOutlineClose/> </button> </div>:  
-         <div>  
-        <button className={styles.openBtn} >Search <BsSearch className={styles.searchIcon}/></button> 
-        </div>}
-
-      </div>
-
       <Link href="/" className={styles.navItem}>
         Home
       </Link>
+      <div className={styles.search} onClick={props.toggleSearchBar}>
+        {props.searchIsShowing ?  <div> 
+        <button className={styles.closeBtn} > <AiOutlineClose/> </button> </div>:  
+        <div>  
+        <button className={styles.openBtn} >Search <BsSearch className={styles.searchIcon}/></button> 
+        </div>}
+      </div>
       {props.searchIsShowing ? (
           <FilterBar
           submit={props.submit}
