@@ -1,6 +1,5 @@
 .formContainer {
     width: 100%
-   
 }
 
 .form {
@@ -8,7 +7,6 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    /* background: gray; */
 }
 
 .form input {
@@ -32,4 +30,28 @@
 }
 .checkbox {
     margin: 0 10px;
+}
+
+/* Mobile */
+@media (max-width: 1028px) {
+    .form { 
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .form label {
+        display: block;
+        padding-bottom: 7px;
+        text-align: center;
+    }
+    .form input {
+        margin-left: 0;
+        padding: 5px 10px;
+    }
+    .form label[for=mass-range] {
+        padding-bottom: 0;
+    }
+    .form span {
+        padding-right: 4px;
+    }
 }

@@ -51,3 +51,9 @@
     transform: translateY(3px);
 }
 
+/* Mobile */
+@media (max-width: 1028px) {
+    .search { 
+        left: 77%;
+    }
+}
