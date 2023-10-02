@@ -49,28 +49,29 @@ export default function Home() {
   const [chartDataByYear, setChartDataByYear] = useState({});
 
   useEffect(() => {
-    const fetchData = async () => {
+    async function fetchData() {
       try {
-        const req = await fetch(
-          "https://data.nasa.gov/resource/gh4g-9sfh.json"
-        );
+        const req = await fetch("https://data.nasa.gov/resource/gh4g-9sfh.json");
         const responseData = await req.json();
-
-        const mapPoints = responseData.map((item) => ({
-          type: "Feature",
-          geometry: {
-            type: "Point",
-            coordinates: [parseFloat(item.reclong), parseFloat(item.reclat)],
-          },
-          properties: {
-            title: item.name,
-            type: item.recclass,
-            year: item.year || "Unknown",
-            mass: parseFloat(item.mass || 0),
-            location: "Unknown",
-          },
+    
+        const mapPoints = await Promise.all(responseData.map(async (item) => {
+          const loc = await fetchLocationData(parseFloat(item.reclat), parseFloat(item.reclong), geoAPI);
+          return {
+            type: "Feature",
+            geometry: {
+              type: "Point",
+              coordinates: [parseFloat(item.reclong), parseFloat(item.reclat)],
+            },
+            properties: {
+              title: item.name,
+              type: item.recclass,
+              year: item.year || "Unknown",
+              mass: parseFloat(item.mass || 0),
+              location: loc || "Unknown",
+            },
+          };
         }));
-
+    
         setSearchLocations((prevSearchLocations) => [
           ...prevSearchLocations,
           ...mapPoints.map((item) => ({
@@ -80,122 +81,28 @@ export default function Home() {
             },
           })),
         ]);
-
+    
         setData(mapPoints);
         setFilteredData(mapPoints);
-
+    
         const chartData = processDataByYear(mapPoints);
         setChartDataByYear(chartData);
+    
+        // Wait for all location data to be fetched
+        await Promise.all(
+          mapPoints.map(async (item) => {
+            item.properties.location = (
+              await item.properties.location
+            ).features[0]?.properties?.formatted || "Unknown";
+          })
+        );
       } catch (error) {
         console.error("Error fetching data:", error);
       }
-    };
+    }
 
     fetchData();
   }, []);
-
-  useEffect(() => {
-    const updateLocations = async () => {
-      if (needsUpdated && searchLocations.length > 0) {
-        const returned = await fetchLocationData(searchLocations, geoAPI);
-        setLocations(returned);
-        setNeedsUpdated(false);
-      }
-    };
-    updateLocations();
-  }, [data]);
-
-  useEffect(() => {
-    if (locations !== undefined) {
-      setData((prevData) => {
-        return prevData.map((prev, index) => {
-          // Check if the index is within the bounds of the 'locations' array
-          const locationInfo = locations?.results[index];
-          try {
-            if (locationInfo?.result?.features[0]?.properties?.country) {
-              return {
-                ...prev,
-                properties: {
-                  ...prev.properties,
-                  location: locationInfo.result.features[0].properties.country,
-                }
-              };
-              //If no location return unknown -test
-            }if(locationInfo?.result?.features[0]?.properties?.ocean){ 
-              return {
-                ...prev,
-                properties: {
-                  ...prev.properties,
-                  location: locationInfo.result.features[0].properties.ocean,
-                }
-              };
-            }else {
-              return {
-                ...prev,
-                properties: {
-                  ...prev.properties,
-                  location: "Unknown",
-                }
-              };
-            }
-          } catch (error) {
-            return {
-              ...prev,
-                properties: {
-                ...prev.properties,
-                  location: "Unknown",
-                }
-            };
-          }
-        });
-      });
-
-      setFilteredData((prevData) => {
-        return prevData.map((prev, index) => {
-          // Check if the index is within the bounds of the 'locations' array
-          const locationInfo = locations?.results[index];
-          try {
-            if (locationInfo?.result?.features[0]?.properties?.country) {
-              return {
-                ...prev,
-                properties: {
-                  ...prev.properties,
-                  location: locationInfo.result.features[0].properties.country,
-                }
-              };
-              //If no location return unknown -test
-            }if(locationInfo?.result?.features[0]?.properties?.ocean){ 
-              return {
-                ...prev,
-                properties: {
-                  ...prev.properties,
-                  location: locationInfo.result.features[0].properties.ocean,
-                }
-              };
-            }else {
-              return {
-                ...prev,
-                properties: {
-                  ...prev.properties,
-                  location: "Unknown",
-                }
-              };
-            }
-          } catch (error) {
-            return {
-              ...prev,
-                properties: {
-                ...prev.properties,
-                  location: "Unknown",
-                }
-            };
-          }
-        });
-      });
-
-    }
-  }, [locations]);
-
 
 
   const handleSubmit = (e) => {
